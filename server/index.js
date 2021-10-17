@@ -2,17 +2,23 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 
-app.get("/", (req, res) => {
-  res.send("Hello world!");
+const test = require("./Models/test");
+
+app.get("/", (req, res, next) => {
+  test.find().then((test) => {
+    console.log(test);
+    res.json(test);
+  });
 });
 
-mongoose
-  .connect(
-    "mongodb+srv://Dinesh:DINESH4046@studentforum.lobyj.mongodb.net/StudentForume?retryWrites=true&w=majority",
-  )
-  .then(() => {
-    app.listen(3000);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+app.listen(3000, async function () {
+  await mongoose.connect(
+    "mongodb+srv://Dinesh:DINESH4046@miniproject.lobyj.mongodb.net/test?retryWrites=true&w=majority",
+    {
+      useUnifiedTopology: true,
+      useNewUrlparser: true,
+    },
+  );
+  console.log(mongoose.connection.readyState);
+  console.log("server running");
+});
