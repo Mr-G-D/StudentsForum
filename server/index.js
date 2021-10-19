@@ -11,7 +11,7 @@ app.get("/", (req, res, next) => {
   });
 });
 
-app.listen(3000, async function () {
+app.listen(3001, async function () {
   await mongoose.connect(
     "mongodb+srv://Dinesh:DINESH4046@miniproject.lobyj.mongodb.net/test?retryWrites=true&w=majority",
     {
