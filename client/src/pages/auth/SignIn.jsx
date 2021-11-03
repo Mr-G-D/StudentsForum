@@ -52,8 +52,8 @@ export default function SignIn() {
         <Grid item xs={12} sm={6} md={4} component={Paper} elevation={6}>
           <Box
             sx={{
-              my: 8,
-              mx: 4,
+              my: 20,
+              mx: 10,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
