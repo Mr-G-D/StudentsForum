@@ -28,7 +28,7 @@ app.get("/", (req, res, next) => {
 
 app.listen(port, async function () {
   await mongoose.connect(
-    `mongodb+srv://${mongo_username}:${mongo_password}@miniproject.lobyj.mongodb.net/test?retryWrites=true&w=majority`,
+    `mongodb+srv://${mongo_username}:${mongo_password}@miniproject.lobyj.mongodb.net/${process.env.APP_NAME}?retryWrites=true&w=majority`,
     {
       useUnifiedTopology: true,
       useNewUrlparser: true,
