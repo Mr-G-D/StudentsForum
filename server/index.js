@@ -2,11 +2,8 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 require("dotenv").config();
-
-const test = require("./Models/test");
-const fs = require("fs");
-const csv = require("csv-parser");
-const college = [];
+const CollegeController = require("./Controller/CollegeController");
+const authRoutes = require("./Routes/Auth");
 
 const mongo_username = process.env.MONGO_USERNAME;
 
@@ -14,17 +11,9 @@ const mongo_password = process.env.MONGO_PASSWORD;
 
 const port = process.env.PORT;
 
-app.get("/", (req, res, next) => {
-  college.pop();
-  fs.createReadStream("./assets/data/colleges.csv")
-    .pipe(csv({}))
-    .on("data", (data) => {
-      college.push(data);
-    })
-    .on("end", () => {
-      res.json(college);
-    });
-});
+app.use("/auth", authRoutes);
+
+app.get("/", CollegeController.feedData);
 
 app.listen(port, async function () {
   await mongoose.connect(
@@ -35,5 +24,5 @@ app.listen(port, async function () {
     },
   );
   console.log(mongoose.connection.readyState);
-  console.log("name");
+  console.log("Server Started");
 });
