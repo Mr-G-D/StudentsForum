@@ -77,3 +77,9 @@ exports.getColleges = (req, res, next) => {
     res.send(resu);
   }).select("CollegeName");
 };
+
+exports.getCourses = (req, res, next) => {
+  Course.find({ id: 119 }, (err, resp) => {
+    res.send(resp);
+  });
+};
