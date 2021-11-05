@@ -2,7 +2,9 @@ const fs = require("fs");
 const csv = require("csv-parser");
 const Colleges = require("../Models/Colleges");
 const test = require("../Models/test");
+const Course = require("../Models/Course");
 
+// FEED
 exports.feedData = async (req, res, next) => {
   // let chunk = [];
   // await fs
@@ -48,22 +50,30 @@ exports.feedData = async (req, res, next) => {
   res.send("Completed");
 };
 
+exports.feedCourses = (req, res, next) => {
+  let chunk = [];
+  fs.createReadStream("./assets/data/courses.csv")
+    .pipe(csv({}))
+    .on("data", (data) => {
+      chunk.push(data);
+    })
+    .on("end", () => {
+      // for (let i = 0; i < chunk.length; i++) {
+      //   const Courses = new Course({
+      //     id: i,
+      //     course: chunk[i]["course"],
+      //   });
+      //   Courses.save().then(() => {
+      //     console.log(i);
+      //   });
+      res.send(chunk);
+      // }
+    });
+};
+
+//FETCH
 exports.getColleges = (req, res, next) => {
   const data = Colleges.find({}, (err, resu) => {
     res.send(resu);
   }).select("CollegeName");
-};
-
-exports.feedCourses = async (req, res, next) => {
-  let courses = [];
-  await fs
-    .createReadStream("./assets/data/courses.csv")
-    .pipe(csv({}))
-    .on("data", (data) => {
-      courses.push(data);
-    })
-    .on("end", () => {
-      console.log(courses);
-      res.send(courses);
-    });
 };
