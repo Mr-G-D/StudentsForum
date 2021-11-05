@@ -161,7 +161,7 @@ export default function SignUp() {
                   options="{top100Films}"
                   sx={{ width: 300 }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Courses" />
+                    <TextField {...params} label="Courses " />
                   )}
                 />
               </Grid>
