@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,12 +9,13 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Autocomplete from "@mui/material/Autocomplete";
+import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "../../styles/auth/signup.css";
+import axios from "axios";
 
 const theme = createTheme();
 
@@ -22,7 +23,6 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
     console.log({
       email: data.get("email"),
       password: data.get("password"),
@@ -32,6 +32,19 @@ export default function SignUp() {
   const [end, setEnd] = useState(null);
 
   const [dob, setDob] = useState(null);
+
+  let colleges = [];
+  useEffect(() => {
+    axios.get("http://127.0.0.1:3001/auth/getColleges").then((response) => {
+      response.data.forEach((element) => {
+        colleges.push(element["CollegeName"]);
+      });
+    }, []);
+  });
+  const filteroptions = createFilterOptions({
+    limit: 100,
+    matchFrom: "start",
+  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -132,22 +145,23 @@ export default function SignUp() {
               <Grid item xs={12}>
                 <Autocomplete
                   disablePortal
-                  id="combo-box-demo"
-                  options="{top100Films}"
+                  id="Colleges"
+                  options={colleges}
                   sx={{ width: 300 }}
+                  filterOptions={filteroptions}
                   renderInput={(params) => (
-                    <TextField {...params} label="Movie" />
+                    <TextField {...params} label="College" />
                   )}
                 />
               </Grid>
               <Grid item xs={12}>
                 <Autocomplete
                   disablePortal
-                  id="combo-box-demo"
+                  id="Courses"
                   options="{top100Films}"
                   sx={{ width: 300 }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Movie" />
+                    <TextField {...params} label="Courses" />
                   )}
                 />
               </Grid>
