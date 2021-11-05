@@ -17,6 +17,7 @@ const port = process.env.PORT;
 app.use("/auth", authRoutes);
 
 app.get("/feedCollege", CollegeController.feedData);
+app.get("/feedCourses", CollegeController.feedCourses);
 
 app.listen(port, async function () {
   await mongoose.connect(

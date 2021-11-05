@@ -53,3 +53,17 @@ exports.getColleges = (req, res, next) => {
     res.send(resu);
   }).select("CollegeName");
 };
+
+exports.feedCourses = async (req, res, next) => {
+  let courses = [];
+  await fs
+    .createReadStream("./assets/data/courses.csv")
+    .pipe(csv({}))
+    .on("data", (data) => {
+      courses.push(data);
+    })
+    .on("end", () => {
+      console.log(courses);
+      res.send(courses);
+    });
+};
