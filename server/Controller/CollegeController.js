@@ -1,3 +1,5 @@
+"use strict";
+
 const fs = require("fs");
 const csv = require("csv-parser");
 const Colleges = require("../Models/Colleges");
@@ -5,7 +7,7 @@ const test = require("../Models/test");
 const Course = require("../Models/Course");
 
 // FEED
-exports.feedData = async (req, res, next) => {
+exports.feedData = (req, res, next) => {
   // let chunk = [];
   // await fs
   //   .createReadStream("./assets/data/colleges.csv")
@@ -63,15 +65,15 @@ exports.feedCourses = (req, res, next) => {
       //     id: i,
       //     course: chunk[i]["course"],
       //   });
-      //   Courses.save().then(() => {
-      //     console.log(i);
-      //   });
+      // Courses.save().then(() => {
+      //   console.log(i);
+      // });
       res.send(chunk);
       // }
     });
 };
 
-exports.setCourses = async (req, res, next) => {
+exports.setCourses = (req, res, next) => {
   let chunk = [];
   fs.createReadStream("./assets/data/colleges.csv")
     .pipe(csv())
@@ -83,14 +85,23 @@ exports.setCourses = async (req, res, next) => {
     })
     .on("end", async () => {
       for (let i = 0; i < chunk.length; i++) {
-        const curr = chunk[i]["name"];
+        let currCourses = [];
         for (let j = 0; j < chunk[i]["courses"].length; j++) {
-          Course.find({ course: chunk[i]["courses"][j] }).then((newData) => {
-            if (newData != null) {
-              array.push(newData);
-            }
-          });
+          await Course.find({ course: chunk[i]["courses"][j].trim() }).then(
+            (newData) => {
+              currCourses.push(newData[0].id);
+            },
+          );
         }
+        console.log(currCourses);
+        console.log(chunk[i]["name"]);
+        // Colleges.findOneAndUpdate(
+        //   { CollegeName: chunk[i]["name"] },
+        //   { Courses: currCourses },
+        //   (err, records) => {
+        //     console.log(currCourses);
+        //   },
+        // );
       }
       res.send("working");
     });
