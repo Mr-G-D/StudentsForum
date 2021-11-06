@@ -28,7 +28,7 @@ const CollegesSchema = new Schema({
     type: String,
   },
   Courses: {
-    type: String,
+    type: Array,
   },
   Facilities: {
     type: String,

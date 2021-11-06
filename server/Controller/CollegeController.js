@@ -32,7 +32,7 @@ exports.feedData = async (req, res, next) => {
   //           : null,
   //         Rating: chunk[i]["Rating"] ? chunk[i]["Rating"] : null,
   //         University: chunk[i]["University"] ? chunk[i]["University"] : null,
-  //         Courses: "yet to add",
+  //         Courses: [],
   //         Facilities: chunk[i]["Facilities"] ? chunk[i]["Facilities"] : null,
   //         City: chunk[i]["City"] ? chunk[i]["City"] : null,
   //         State: chunk[i]["State"] ? chunk[i]["State"] : null,
@@ -68,6 +68,31 @@ exports.feedCourses = (req, res, next) => {
       //   });
       res.send(chunk);
       // }
+    });
+};
+
+exports.setCourses = async (req, res, next) => {
+  let chunk = [];
+  fs.createReadStream("./assets/data/colleges.csv")
+    .pipe(csv())
+    .on("data", (data) => {
+      chunk.push({
+        name: data["CollegeName"],
+        courses: data["Courses"].split(","),
+      });
+    })
+    .on("end", async () => {
+      for (let i = 0; i < chunk.length; i++) {
+        const curr = chunk[i]["name"];
+        for (let j = 0; j < chunk[i]["courses"].length; j++) {
+          Course.find({ course: chunk[i]["courses"][j] }).then((newData) => {
+            if (newData != null) {
+              array.push(newData);
+            }
+          });
+        }
+      }
+      res.send("working");
     });
 };
 

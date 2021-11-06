@@ -18,6 +18,7 @@ app.use("/auth", authRoutes);
 
 app.get("/feedCollege", CollegeController.feedData);
 app.get("/feedCourses", CollegeController.feedCourses);
+app.get("/setCourses", CollegeController.setCourses);
 
 app.listen(port, async function () {
   await mongoose.connect(
