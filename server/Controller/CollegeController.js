@@ -7,18 +7,20 @@ const test = require("../Models/test");
 const Course = require("../Models/Course");
 
 // FEED
-exports.feedData = (req, res, next) => {
-  // let chunk = [];
+exports.feedData = async (req, res, next) => {
+  let chunk = [];
   // await fs
   //   .createReadStream("./assets/data/colleges.csv")
   //   .pipe(csv({}))
   //   .on("data", (data) => {
   //     chunk.push(data);
   //   })
-  //   .on("end", () => {
+  //   .on("end", async () => {
   //     for (let i = 0; i < chunk.length; i++) {
-  //       const college = new Colleges({
-  //         CollegeName: chunk[i]["CollegeName"] ? chunk[i]["CollegeName"] : null,
+  //       const college = await new Colleges({
+  //         CollegeName: chunk[i]["CollegeName"]
+  //           ? chunk[i]["CollegeName"].trim()
+  //           : null,
   //         GendersAccepted: chunk[i]["GendersAccepted"]
   //           ? chunk[i]["GendersAccepted"]
   //           : null,
@@ -54,10 +56,15 @@ exports.feedData = (req, res, next) => {
 
 exports.feedCourses = (req, res, next) => {
   let chunk = [];
+  let index = 0;
   fs.createReadStream("./assets/data/courses.csv")
     .pipe(csv({}))
     .on("data", (data) => {
-      chunk.push(data);
+      chunk.push({
+        course: data.course,
+        id: index,
+      });
+      index++;
     })
     .on("end", () => {
       // for (let i = 0; i < chunk.length; i++) {
@@ -68,43 +75,65 @@ exports.feedCourses = (req, res, next) => {
       // Courses.save().then(() => {
       //   console.log(i);
       // });
+      console.log(
+        chunk.filter((e) => e.course === "B.Tech Computer Science Engineering"),
+      );
       res.send(chunk);
-      // }
     });
 };
 
-exports.setCourses = (req, res, next) => {
-  let chunk = [];
-  fs.createReadStream("./assets/data/colleges.csv")
-    .pipe(csv())
-    .on("data", (data) => {
-      chunk.push({
-        name: data["CollegeName"],
-        courses: data["Courses"].split(","),
-      });
-    })
-    .on("end", async () => {
-      for (let i = 0; i < chunk.length; i++) {
-        let currCourses = [];
-        for (let j = 0; j < chunk[i]["courses"].length; j++) {
-          await Course.find({ course: chunk[i]["courses"][j].trim() }).then(
-            (newData) => {
-              currCourses.push(newData[0].id);
-            },
-          );
-        }
-        console.log(currCourses);
-        console.log(chunk[i]["name"]);
-        // Colleges.findOneAndUpdate(
-        //   { CollegeName: chunk[i]["name"] },
-        //   { Courses: currCourses },
-        //   (err, records) => {
-        //     console.log(currCourses);
-        //   },
-        // );
-      }
-      res.send("working");
-    });
+exports.setCourses = async (req, res, next) => {
+  await Colleges.deleteMany({ Courses: [0, 0] });
+  res.send(" Work Done ");
+  //   let chunk = [];
+  //   fs.createReadStream("./assets/data/colleges.csv")
+  //     .pipe(csv())
+  //     .on("data", (data) => {
+  //       chunk.push({
+  //         name: data["CollegeName"],
+  //         courses: data["Courses"].split(",").map(function (item) {
+  //           return item.trim();
+  //         }),
+  //       });
+  //     })
+  //     .on("end", async () => {
+  //       let chunk2 = [];
+  //       let index = 0;
+  //       fs.createReadStream("./assets/data/courses.csv")
+  //         .pipe(csv({}))
+  //         .on("data", (data) => {
+  //           chunk2.push({
+  //             course: data.course,
+  //             id: index,
+  //           });
+  //           index++;
+  //         })
+  //         .on("end", async () => {
+  //           Colleges.find({ Courses: [0] }, (err, resp) => {
+  //             resp.map((value) => {
+  //               Course.find(
+  //                 {
+  //                   course: chunk.filter(
+  //                     (e) => e.name.trim() == value.CollegeName,
+  //                   )[0].courses,
+  //                 },
+  //                 async (err, newData) => {
+  //                   await Colleges.findOneAndUpdate(
+  //                     { CollegeName: value.CollegeName },
+  //                     {
+  //                       $push: {
+  //                         Courses: newData[0].id,
+  //                       },
+  //                     },
+  //                   );
+  //                   console.log(value.CollegeName);
+  //                 },
+  //               );
+  //             });
+  //           }).select({ CollegeName: 1, _id: 0 });
+  //           res.send("Working");
+  //         });
+  //     });
 };
 
 //FETCH
@@ -119,3 +148,57 @@ exports.getCourses = (req, res, next) => {
     res.send(resp);
   });
 };
+
+//SET COURSES V1
+
+// for (let i = 114; i < chunk.length; i++) {
+//   let currCourses = [];
+//   for (let j = 0; j < chunk[i]["courses"].length; j++) {
+//     await Course.find({ course: chunk[i]["courses"][j].trim() }).then(
+//       (newData) => {
+//         // if (!currCourses.includes(newData[0].id)) {
+//         //   currCourses.push(newData[0].id);
+//         // }
+//       },
+//     );
+//   }
+// console.log(currCourses);
+// console.log(chunk[i]["name"]);
+
+// Colleges.findOneAndUpdate(
+//   { CollegeName: chunk[i]["name"] },
+//   { Courses: currCourses },
+//   (err, records) => {
+//     console.log(currCourses);
+//     console.log(chunk[i]["name"]);
+//   },
+// );
+// }
+
+//SET COURSES V2
+
+// chunk2.forEach((item) => {
+//   chunk
+//     .filter((e) => e.courses.includes(item.course))
+//     .map(async (element) => {
+//       await Colleges.findOneAndUpdate(
+//         {
+//           CollegeName: element.name,
+//         },
+//         {
+//           $addToSet: {
+//             Courses: item.id,
+//           },
+//         },
+//       );
+//       console.log(element.name);
+//       console.log(item);
+//     });
+// });
+// console.log(
+//   chunk.filter((e) =>
+//     e.courses.includes("B.Tech Mechanical Engineering"),
+//   ),
+// );
+// res.send(chunk);
+// }
