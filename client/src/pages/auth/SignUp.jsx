@@ -28,10 +28,20 @@ export default function SignUp() {
       password: data.get("password"),
     });
   };
+
   const [start, setStart] = useState(null);
   const [end, setEnd] = useState(null);
-
   const [dob, setDob] = useState(null);
+  const [college, setCollege] = useState();
+
+  let courses = [];
+  useEffect(() => {
+    axios.get(`http://127.0.0.1:3001/auth/getCourses`).then((response) => {
+      response.data.forEach((element) => {
+        console.log(element);
+      });
+    }, []);
+  });
 
   let colleges = [];
   useEffect(() => {
@@ -41,11 +51,18 @@ export default function SignUp() {
       });
     }, []);
   });
+
   const filteroptions = createFilterOptions({
     limit: 100,
     matchFrom: "start",
   });
 
+  const handleCollege = (e) => {
+    if (e.target.innerText !== null) {
+      console.log(e.target.innerText);
+      setCollege(e.target.innerText);
+    }
+  };
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -149,8 +166,9 @@ export default function SignUp() {
                   options={colleges}
                   sx={{ width: 300 }}
                   filterOptions={filteroptions}
+                  onChange={(e) => handleCollege(e)}
                   renderInput={(params) => (
-                    <TextField {...params} label="College" />
+                    <TextField {...params} value={college} label="College" />
                   )}
                 />
               </Grid>
@@ -158,7 +176,8 @@ export default function SignUp() {
                 <Autocomplete
                   disablePortal
                   id="Courses"
-                  options="{top100Films}"
+                  options={courses}
+                  filterOptions={filteroptions}
                   sx={{ width: 300 }}
                   renderInput={(params) => (
                     <TextField {...params} label="Courses " />
