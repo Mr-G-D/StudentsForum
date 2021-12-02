@@ -144,9 +144,22 @@ exports.getColleges = (req, res, next) => {
 };
 
 exports.getCourses = (req, res, next) => {
-  Course.find({ id: 119 }, (err, resp) => {
-    res.send(resp);
-  });
+  const courses = ["0"];
+  const college = req.query.college;
+  if (college != null) {
+    Colleges.find({ CollegeName: college }, async (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        await result[0].Courses.forEach((element) => {
+          Course.find({ id: element }, (err, courseName) => {
+            courses.push(courseName[0].course);
+          }).select({ course: 1, _id: 0 });
+        });
+        res.send(courses);
+      }
+    }).select({ Courses: 1, _id: 0 });
+  }
 };
 
 //SET COURSES V1
