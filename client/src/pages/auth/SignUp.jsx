@@ -36,18 +36,22 @@ export default function SignUp() {
 
   let courses = [];
   useEffect(() => {
-    axios.get(`http://127.0.0.1:3001/auth/getCourses`).then((response) => {
-      response.data.forEach((element) => {
-        console.log(element);
-      });
-    }, []);
-  });
+    axios
+      .get(`http://127.0.0.1:3001/auth/getCourses`, {
+        params: {
+          college: college,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      }, []);
+  }, [college]);
 
   let colleges = [];
   useEffect(() => {
     axios.get("http://127.0.0.1:3001/auth/getColleges").then((response) => {
       response.data.forEach((element) => {
-        colleges.push(element["CollegeName"]);
+        colleges.push(element);
       });
     }, []);
   });
@@ -59,7 +63,7 @@ export default function SignUp() {
 
   const handleCollege = (e) => {
     if (e.target.innerText !== null) {
-      console.log(e.target.innerText);
+      console.log(e.target);
       setCollege(e.target.innerText);
     }
   };
@@ -167,6 +171,7 @@ export default function SignUp() {
                   sx={{ width: 300 }}
                   filterOptions={filteroptions}
                   onChange={(e) => handleCollege(e)}
+                  getOptionLabel={(option) => option.CollegeName}
                   renderInput={(params) => (
                     <TextField {...params} value={college} label="College" />
                   )}
