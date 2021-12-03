@@ -16,6 +16,12 @@ import DatePicker from "@mui/lab/DatePicker";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "../../styles/auth/signup.css";
 import axios from "axios";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import InputAdornment from "@mui/material/InputAdornment";
+import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
+import Visibility from "@mui/icons-material/Visibility";
+import IconButton from "@mui/material/IconButton";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const theme = createTheme();
 
@@ -74,7 +80,7 @@ export default function SignUp() {
   };
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container className="box" component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -99,6 +105,13 @@ export default function SignUp() {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <PersonOutlineOutlinedIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                   autoComplete="given-name"
                   name="firstName"
                   required
@@ -110,6 +123,13 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <PersonOutlineOutlinedIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                   required
                   fullWidth
                   id="lastName"
@@ -121,6 +141,13 @@ export default function SignUp() {
               <Grid item xs={12}>
                 <TextField
                   required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <MailOutlineOutlinedIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                   fullWidth
                   id="email"
                   label="Email Address"
@@ -131,6 +158,18 @@ export default function SignUp() {
               <Grid item xs={12}>
                 <TextField
                   required
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          edge="end"
+                        >
+                          <Visibility />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                   fullWidth
                   name="password"
                   label="Password"
@@ -141,14 +180,23 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  style={{
-                    borderRadius: "50px",
-                  }}
                   required
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          edge="end"
+                        >
+                          <Visibility />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                   fullWidth
                   name="confirmPassword"
                   label="Confirm Password"
-                  type="confirmPassword"
+                  type="Password"
                   id="confirmPassword"
                   autoComplete="confirm-password"
                 />
@@ -198,7 +246,7 @@ export default function SignUp() {
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
                     views={["year", "month"]}
-                    label="Year and Month"
+                    label="Course Beginning"
                     maxDate={new Date()}
                     value={start}
                     onChange={(date) => {
@@ -214,7 +262,7 @@ export default function SignUp() {
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
                     views={["year", "month"]}
-                    label="Year and Month"
+                    label="Course End"
                     minDate={new Date(start)}
                     value={end}
                     onChange={(date) => {
