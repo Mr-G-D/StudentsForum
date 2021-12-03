@@ -143,22 +143,28 @@ exports.getColleges = (req, res, next) => {
   }).select("CollegeName");
 };
 
-exports.getCourses = (req, res, next) => {
-  const courses = ["0"];
+exports.getCourses = async (req, res, next) => {
+  let data = [];
   const college = req.query.college;
   if (college != null) {
-    Colleges.find({ CollegeName: college }, async (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        await result[0].Courses.forEach((element) => {
-          Course.find({ id: element }, (err, courseName) => {
-            courses.push(courseName[0].course);
-          }).select({ course: 1, _id: 0 });
-        });
-        res.send(courses);
+    const oldVal = await Colleges.find({ CollegeName: college }).select({
+      Courses: 1,
+      _id: 0,
+    });
+    let chunk = oldVal[0].Courses;
+    if (oldVal[0].Courses.length > 50) {
+      chunk = oldVal[0].Courses.slice(0, 50);
+    }
+    chunk.forEach(async (element) => {
+      const newVal = await Course.find({ id: element }).select({
+        course: 1,
+        _id: 0,
+      });
+      data.push(newVal[0].course);
+      if (chunk[chunk.length - 1] == element) {
+        res.send(data);
       }
-    }).select({ Courses: 1, _id: 0 });
+    });
   }
 };
 

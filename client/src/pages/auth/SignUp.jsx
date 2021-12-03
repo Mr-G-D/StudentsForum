@@ -32,27 +32,27 @@ export default function SignUp() {
   const [start, setStart] = useState(null);
   const [end, setEnd] = useState(null);
   const [dob, setDob] = useState(null);
-  const [college, setCollege] = useState();
-
-  let courses = [];
-  useEffect(() => {
-    axios
-      .get(`http://127.0.0.1:3001/auth/getCourses`, {
-        params: {
-          college: college,
-        },
-      })
-      .then((response) => {
-        console.log(response);
-      }, []);
-  }, [college]);
+  const [college, setCollege] = useState(null);
+  const [course, setCourse] = useState(null);
 
   let colleges = [];
+  let courses = [];
   useEffect(() => {
     axios.get("http://127.0.0.1:3001/auth/getColleges").then((response) => {
       response.data.forEach((element) => {
-        colleges.push(element);
+        colleges.push(element.CollegeName);
       });
+      axios
+        .get(`http://127.0.0.1:3001/auth/getCourses`, {
+          params: {
+            college: college,
+          },
+        })
+        .then((response) => {
+          response.data.forEach((element) => {
+            courses.push(element);
+          });
+        });
     }, []);
   });
 
@@ -63,8 +63,13 @@ export default function SignUp() {
 
   const handleCollege = (e) => {
     if (e.target.innerText !== null) {
-      console.log(e.target);
       setCollege(e.target.innerText);
+    }
+  };
+
+  const handleCourse = (e) => {
+    if (e.target.innerText !== null) {
+      setCourse(e.target.innerText);
     }
   };
   return (
@@ -171,7 +176,6 @@ export default function SignUp() {
                   sx={{ width: 300 }}
                   filterOptions={filteroptions}
                   onChange={(e) => handleCollege(e)}
-                  getOptionLabel={(option) => option.CollegeName}
                   renderInput={(params) => (
                     <TextField {...params} value={college} label="College" />
                   )}
@@ -182,10 +186,11 @@ export default function SignUp() {
                   disablePortal
                   id="Courses"
                   options={courses}
+                  onChange={(e) => handleCourse(e)}
                   filterOptions={filteroptions}
                   sx={{ width: 300 }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Courses " />
+                    <TextField {...params} value={course} label="Courses " />
                   )}
                 />
               </Grid>
