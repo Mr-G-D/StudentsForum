@@ -40,6 +40,10 @@ export default function SignUp() {
   const [dob, setDob] = useState(null);
   const [college, setCollege] = useState(null);
   const [course, setCourse] = useState(null);
+  const [visibility, setVisibility] = useState({
+    passwordVisibility: false,
+    confirmPasswordVisibility: false,
+  });
 
   let colleges = [];
   let courses = [];
@@ -77,6 +81,20 @@ export default function SignUp() {
     if (e.target.innerText !== null) {
       setCourse(e.target.innerText);
     }
+  };
+
+  const handlePasswordVisibility = () => {
+    setVisibility({
+      ...visibility,
+      passwordVisibility: !visibility.passwordVisibility,
+    });
+  };
+
+  const handleConfirmPasswordVisibility = () => {
+    setVisibility({
+      ...visibility,
+      confirmPasswordVisibility: !visibility.confirmPasswordVisibility,
+    });
   };
   return (
     <ThemeProvider theme={theme}>
@@ -162,10 +180,15 @@ export default function SignUp() {
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton
+                          onClick={handlePasswordVisibility}
                           aria-label="toggle password visibility"
                           edge="end"
                         >
-                          <Visibility />
+                          {visibility.passwordVisibility ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
                         </IconButton>
                       </InputAdornment>
                     ),
@@ -173,7 +196,7 @@ export default function SignUp() {
                   fullWidth
                   name="password"
                   label="Password"
-                  type="password"
+                  type={visibility.passwordVisibility ? "test" : "password"}
                   id="password"
                   autoComplete="new-password"
                 />
@@ -185,10 +208,15 @@ export default function SignUp() {
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton
+                          onClick={handleConfirmPasswordVisibility}
                           aria-label="toggle password visibility"
                           edge="end"
                         >
-                          <Visibility />
+                          {visibility.confirmPasswordVisibility ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
                         </IconButton>
                       </InputAdornment>
                     ),
@@ -196,7 +224,9 @@ export default function SignUp() {
                   fullWidth
                   name="confirmPassword"
                   label="Confirm Password"
-                  type="Password"
+                  type={
+                    visibility.confirmPasswordVisibility ? "test" : "password"
+                  }
                   id="confirmPassword"
                   autoComplete="confirm-password"
                 />
