@@ -2,11 +2,13 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
+const session = require("express-session");
 require("dotenv").config();
 const CollegeController = require("./Controller/CollegeController");
 const authRoutes = require("./Routes/Auth");
 
 app.use(cors());
+app.use(session({ secret: "myApp", resave: false, saveUninitialized: false }));
 
 const mongo_username = process.env.MONGO_USERNAME;
 
