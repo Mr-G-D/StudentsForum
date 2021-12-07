@@ -31,8 +31,15 @@ export default function SignUp() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
+      firstName: data.get("firstName"),
+      lastName: data.get("lastName"),
       email: data.get("email"),
       password: data.get("password"),
+      dateOfBirth: dob,
+      college: college,
+      course: course,
+      startDate: start,
+      endDate: end,
     });
   };
 
@@ -258,6 +265,8 @@ export default function SignUp() {
                   <DatePicker
                     required
                     fullWidth
+                    id="dateOfBirth"
+                    name="dateOfBirth"
                     label="Date of Birth"
                     maxDate={new Date()}
                     value={dob}
@@ -271,7 +280,7 @@ export default function SignUp() {
               <Grid item xs={12}>
                 <Autocomplete
                   disablePortal
-                  id="Colleges"
+                  id="College"
                   options={colleges}
                   sx={{ width: 300 }}
                   filterOptions={filteroptions}
@@ -284,7 +293,7 @@ export default function SignUp() {
               <Grid item xs={12} display="flex">
                 <Autocomplete
                   disablePortal
-                  id="Courses"
+                  id="Course"
                   options={courses}
                   onChange={(e) => handleCourse(e)}
                   filterOptions={filteroptions}
@@ -297,7 +306,8 @@ export default function SignUp() {
               <Grid item xs={12} sm={6}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
-                    views={["year", "month"]}
+                    id="startDate"
+                    name="startDate"
                     label="Course Beginning"
                     maxDate={new Date()}
                     value={start}
@@ -313,7 +323,8 @@ export default function SignUp() {
               <Grid item xs={12} sm={6}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
-                    views={["year", "month"]}
+                    id="endDate"
+                    name="endDate"
                     label="Course End"
                     minDate={new Date(start)}
                     value={end}
