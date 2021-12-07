@@ -22,6 +22,7 @@ import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import Visibility from "@mui/icons-material/Visibility";
 import IconButton from "@mui/material/IconButton";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import $ from "jquery";
 
 const theme = createTheme();
 
@@ -43,6 +44,7 @@ export default function SignUp() {
   const [visibility, setVisibility] = useState({
     passwordVisibility: false,
     confirmPasswordVisibility: false,
+    passwordValidate: true,
   });
 
   let colleges = [];
@@ -95,6 +97,22 @@ export default function SignUp() {
       ...visibility,
       confirmPasswordVisibility: !visibility.confirmPasswordVisibility,
     });
+  };
+
+  const validatePassword = () => {
+    const password = $("#password");
+    const confirmPassword = $("#confirmPassword");
+    if (password[0].value !== confirmPassword[0].value) {
+      setVisibility({
+        ...visibility,
+        passwordValidate: false,
+      });
+    } else {
+      setVisibility({
+        ...visibility,
+        passwordValidate: true,
+      });
+    }
   };
   return (
     <ThemeProvider theme={theme}>
@@ -196,13 +214,15 @@ export default function SignUp() {
                   fullWidth
                   name="password"
                   label="Password"
-                  type={visibility.passwordVisibility ? "test" : "password"}
+                  type={visibility.passwordVisibility ? "text" : "password"}
                   id="password"
-                  autoComplete="new-password"
+                  onBlur={validatePassword}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  error={visibility.passwordValidate ? false : true}
+                  className="test"
                   required
                   InputProps={{
                     endAdornment: (
@@ -225,10 +245,10 @@ export default function SignUp() {
                   name="confirmPassword"
                   label="Confirm Password"
                   type={
-                    visibility.confirmPasswordVisibility ? "test" : "password"
+                    visibility.confirmPasswordVisibility ? "text" : "password"
                   }
                   id="confirmPassword"
-                  autoComplete="confirm-password"
+                  onBlur={validatePassword}
                 />
               </Grid>
               <Grid item xs={12}>
