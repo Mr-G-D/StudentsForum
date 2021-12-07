@@ -54,17 +54,19 @@ export default function SignUp() {
       response.data.forEach((element) => {
         colleges.push(element.CollegeName);
       });
-      axios
-        .get(`http://127.0.0.1:3001/auth/getCourses`, {
-          params: {
-            college: college,
-          },
-        })
-        .then((response) => {
-          response.data.forEach((element) => {
-            courses.push(element);
+      if (college !== null) {
+        axios
+          .get(`http://127.0.0.1:3001/auth/getCourses`, {
+            params: {
+              college: college,
+            },
+          })
+          .then((response) => {
+            response.data.forEach((element) => {
+              courses.push(element);
+            });
           });
-        });
+      }
     }, []);
   });
 
@@ -279,7 +281,7 @@ export default function SignUp() {
                   )}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} display="flex">
                 <Autocomplete
                   disablePortal
                   id="Courses"
