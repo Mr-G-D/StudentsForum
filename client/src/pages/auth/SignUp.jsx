@@ -23,40 +23,88 @@ import Visibility from "@mui/icons-material/Visibility";
 import IconButton from "@mui/material/IconButton";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import $ from "jquery";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const theme = createTheme();
 
 export default function SignUp() {
+  const notify = (message) => {
+    toast.error(`Please check your ${message} `, {
+      theme: "colored",
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-      dateOfBirth: dob,
-      college: college,
-      course: course,
-      startDate: start,
-      endDate: end,
-    });
+    if (formValues.firstName === "") {
+      notify("First Name");
+      $("#firstName")[0].focus();
+      return false;
+    }
+    if (formValues.lastName === "") {
+      notify("Last Name");
+      $("#lastName")[0].focus();
+      return false;
+    }
+    if (formValues.email === "") {
+      notify("E-Mail ID");
+      $("#email")[0].focus();
+      return false;
+    }
+    if (visibility.passwordValidate === false) {
+      notify("Password");
+      $("#password")[0].focus();
+      return false;
+    }
+    if (dob === null) {
+      notify("Date Of Birth");
+      return false;
+    }
+    if (college === null) {
+      notify("College");
+      return false;
+    }
+    if (course === null) {
+      notify("Course");
+      return false;
+    }
+    if (start === null) {
+      notify("Course Begin Date");
+      return false;
+    }
+    if (end === null) {
+      notify("Course End Date");
+      return false;
+    }
 
     const response = await axios.post("http://127.0.0.1:3001/auth/register", {
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
+      firstName: formValues.firstName,
+      lastName: formValues.lastName,
+      email: formValues.email,
+      password: formValues.password,
       dateOfBirth: dob,
       college: college,
       course: course,
       startDate: start,
       endDate: end,
     });
-
     console.log(response);
   };
 
+  const [formValues, setFormValues] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    submit: true,
+  });
   const [start, setStart] = useState(null);
   const [end, setEnd] = useState(null);
   const [dob, setDob] = useState(null);
@@ -137,6 +185,12 @@ export default function SignUp() {
       });
     }
   };
+
+  const handleChange = async (event) => {
+    const { name, value } = event.target;
+    await setFormValues({ ...formValues, [name]: value });
+    console.log(formValues);
+  };
   return (
     <ThemeProvider theme={theme}>
       <Container className="box" component="main" maxWidth="xs">
@@ -171,13 +225,14 @@ export default function SignUp() {
                       </InputAdornment>
                     ),
                   }}
-                  autoComplete="given-name"
                   name="firstName"
                   required
                   fullWidth
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  onChange={handleChange}
+                  value={formValues.firstName}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -194,7 +249,8 @@ export default function SignUp() {
                   id="lastName"
                   label="Last Name"
                   name="lastName"
-                  autoComplete="family-name"
+                  onChange={handleChange}
+                  value={formValues.lastName}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -211,7 +267,8 @@ export default function SignUp() {
                   id="email"
                   label="Email Address"
                   name="email"
-                  autoComplete="email"
+                  onChange={handleChange}
+                  value={formValues.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -240,12 +297,12 @@ export default function SignUp() {
                   type={visibility.passwordVisibility ? "text" : "password"}
                   id="password"
                   onBlur={validatePassword}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   error={visibility.passwordValidate ? false : true}
-                  className="test"
                   required
                   InputProps={{
                     endAdornment: (
@@ -360,6 +417,18 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
+            <ToastContainer
+              style={{ width: "auto", height: "10%", textSizeAdjust: "50%" }}
+              position="bottom-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="signin" variant="body2">
