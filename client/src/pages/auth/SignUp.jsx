@@ -27,7 +27,7 @@ import $ from "jquery";
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
@@ -41,6 +41,20 @@ export default function SignUp() {
       startDate: start,
       endDate: end,
     });
+
+    const response = await axios.post("http://127.0.0.1:3001/auth/register", {
+      firstName: data.get("firstName"),
+      lastName: data.get("lastName"),
+      email: data.get("email"),
+      password: data.get("password"),
+      dateOfBirth: dob,
+      college: college,
+      course: course,
+      startDate: start,
+      endDate: end,
+    });
+
+    console.log(response);
   };
 
   const [start, setStart] = useState(null);

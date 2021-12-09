@@ -7,6 +7,7 @@ const CollegeController = require("./Controller/CollegeController");
 const authRoutes = require("./Routes/Auth");
 
 app.use(cors());
+app.use(express.json());
 
 const mongo_username = process.env.MONGO_USERNAME;
 
