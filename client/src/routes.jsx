@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import authRoutes from "./layouts/AuthRoutes";
-import DashboardRoutes from "./layouts/DashboardRoutes";
+import authRoutes from "./Routes/AuthRoutes";
+import DashboardRoutes from "./Routes/DashboardRoutes";
 
 const Routes = () => {
   const getRoutes = (routes) => {
