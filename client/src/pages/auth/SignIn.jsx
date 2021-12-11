@@ -12,21 +12,46 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useRouteMatch } from "react-router-dom";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 
 const theme = createTheme();
 
 export default function SignIn() {
-  const url = useRouteMatch();
-  console.log(url);
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
+
+    const response = await axios.post("http://127.0.0.1:3001/auth/login", {
       email: data.get("email"),
       password: data.get("password"),
     });
+    if (response.data === true) {
+      window.location.href = "/dashboard";
+      toast.success(`Log in Successfull `, {
+        theme: "colored",
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.error(`Incorrect Password `, {
+        theme: "colored",
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    console.log(response.data);
+    // eslint-disable-next-line no-console
   };
 
   return (
@@ -103,6 +128,18 @@ export default function SignIn() {
               >
                 Sign In
               </Button>
+              <ToastContainer
+                style={{ width: "auto", height: "10%", textSizeAdjust: "50%" }}
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">

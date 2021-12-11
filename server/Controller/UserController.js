@@ -27,3 +27,9 @@ exports.register = async (req, res, next) => {
     }
   }
 };
+
+exports.login = async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.emailID });
+  const status = await bcrypt.compare(req.body.password, user.password);
+  res.send(status);
+};
