@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,10 +14,16 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
+import { IconButton, InputAdornment } from "@mui/material";
+import { VisibilityOff, Visibility } from "@mui/icons-material";
+// import  from "@mui/icons-material/Visibility";
 
 const theme = createTheme();
 
 export default function SignIn() {
+  const handlePasswordVisibility = () => {
+    setPasswordVisibility(!passwordVisibility);
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -53,6 +59,8 @@ export default function SignIn() {
     console.log(response.data);
     // eslint-disable-next-line no-console
   };
+
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
 
   return (
     <ThemeProvider theme={theme}>
@@ -110,9 +118,26 @@ export default function SignIn() {
                 margin="normal"
                 required
                 fullWidth
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={handlePasswordVisibility}
+                        aria-label="toggle password visibility"
+                        edge="end"
+                      >
+                        {passwordVisibility ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
                 name="password"
                 label="Password"
-                type="password"
+                type={passwordVisibility ? "text" : "password"}
                 id="password"
                 autoComplete="current-password"
               />
