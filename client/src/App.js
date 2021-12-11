@@ -1,14 +1,13 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import AuthLayouts from "./layouts/AuthLayouts";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Routes from "./Routes";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Redirect to="/auth/signup" />
-        <Route path="/auth" render={(props) => <AuthLayouts {...props} />} />
+        <Route path="/" render={(props) => <Routes {...props} />} />
       </Router>
     </div>
   );

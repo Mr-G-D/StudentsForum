@@ -1,18 +1,19 @@
 "use strict";
+const bcrypt = require("bcryptjs");
 const User = require("../Models/User");
 
 exports.register = async (req, res, next) => {
-  console.log(req.body);
   const user = await User.findOne({ email: req.body.emailID });
   if (user) {
     res.json({ status: "error", error: "Duplicate E-Mail" });
   } else {
     try {
+      const hashedPassword = await bcrypt.hash(req.body.password, 12);
       const newUser = await User.create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         emailID: req.body.email,
-        password: req.body.password,
+        password: hashedPassword,
         dateOfBirth: req.body.dateOfBirth,
         college: req.body.college,
         course: req.body.course,

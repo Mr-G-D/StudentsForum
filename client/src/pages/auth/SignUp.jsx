@@ -95,7 +95,31 @@ export default function SignUp() {
       startDate: start,
       endDate: end,
     });
-    console.log(response);
+    if (response.data.error === "Duplicate E-Mail") {
+      toast.error(`E-Mail ID already in use `, {
+        theme: "colored",
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    if (response.data.status === "success") {
+      window.location.href = "/dashboard";
+      toast.success(`Registeration Successfull `, {
+        theme: "colored",
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   const [formValues, setFormValues] = useState({
@@ -188,8 +212,7 @@ export default function SignUp() {
 
   const handleChange = async (event) => {
     const { name, value } = event.target;
-    await setFormValues({ ...formValues, [name]: value });
-    console.log(formValues);
+    setFormValues({ ...formValues, [name]: value });
   };
   return (
     <ThemeProvider theme={theme}>

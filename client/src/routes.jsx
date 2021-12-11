@@ -1,19 +1,27 @@
-import SignIn from "./pages/auth/SignIn";
-import SignUp from "./pages/auth/SignUp";
+import React from "react";
+import { Route } from "react-router-dom";
+import authRoutes from "./layouts/AuthRoutes";
+import DashboardRoutes from "./layouts/DashboardRoutes";
 
-const authRoutes = [
-  {
-    path: "/signin",
-    name: "signin",
-    component: SignIn,
-    layout: "/auth",
-  },
-  {
-    path: "/signup",
-    name: "signup",
-    component: SignUp,
-    layout: "/auth",
-  },
-];
+const Routes = () => {
+  const getRoutes = (routes) => {
+    return routes.map((prop, key) => {
+      return (
+        <Route
+          path={prop.layout + prop.path}
+          component={prop.component}
+          key={key}
+        />
+      );
+    });
+  };
 
-export default authRoutes;
+  return (
+    <div>
+      {getRoutes(authRoutes)}
+      {getRoutes(DashboardRoutes)}
+    </div>
+  );
+};
+
+export default Routes;
