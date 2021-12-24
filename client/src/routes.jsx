@@ -1,6 +1,6 @@
+import Dashboard from "./pages/admin/Dashboard";
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
-import Dashboard from "./pages/admin/Dashboard";
 
 export const authRoutes = [
   {
