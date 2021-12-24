@@ -1,8 +1,9 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const app = express();
+
 const CollegeController = require("./Controller/CollegeController");
 const authRoutes = require("./Routes/Auth");
 
