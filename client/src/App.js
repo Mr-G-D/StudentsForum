@@ -1,14 +1,13 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import index from "./pages/index";
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import Routes from "./Routes";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Route exact path="/" render={index} />
+        <Redirect exact path="/" to="/auth/signin" />
         <Route path="/" render={(props) => <Routes {...props} />} />
       </Router>
     </div>
