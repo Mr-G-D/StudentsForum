@@ -13,7 +13,6 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Sidebar from "./Sidebar";
-import { width } from "@mui/system";
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);

@@ -8,10 +8,9 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import { makeStyles } from "@mui/styles";
+import "styles/layouts/Sidebar.css";
 
 export default function Sidebar(props) {
-  const classes = useStyles();
   const [state, setState] = useState(false);
 
   const toggleDrawer = (open) => (event) => {
@@ -27,11 +26,11 @@ export default function Sidebar(props) {
   return (
     <div>
       <Drawer
-        className={classes.drawer}
+        className="drawer"
         open={state}
         onClose={toggleDrawer(false)}
         classes={{
-          paper: classes.drawerPaper,
+          paper: "drawerPaper",
         }}
       >
         <Box
@@ -55,16 +54,3 @@ export default function Sidebar(props) {
     </div>
   );
 }
-
-const useStyles = makeStyles((theme) => ({
-  hide: {
-    display: "none",
-  },
-  drawer: {
-    width: 240,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: 240,
-  },
-}));
