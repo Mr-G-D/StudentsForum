@@ -41,8 +41,8 @@ export default function SignIn() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    dispatch(signIn(formData, history));
-    // console.log(response);
+    const response = await dispatch(signIn(formData, history));
+    console.log(response);
     // if (response.status === 200) {
     //   // window.location.href = "/dashboard";
     //   toast.success(`Log in Successfull `, {
