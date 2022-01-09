@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { authRoutes } from "../Routes";
+import { authRoutes } from "../routes";
 
 const AuthRoutes = () => {
   const getRoutes = (routes) => {
