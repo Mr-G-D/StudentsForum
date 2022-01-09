@@ -32,8 +32,9 @@ export default function SignIn() {
       email: data.get("email"),
       password: data.get("password"),
     });
-    if (response.data) {
-      window.location.href = "/dashboard";
+    console.log(response);
+    if (response.status === 200) {
+      // window.location.href = "/dashboard";
       toast.success(`Log in Successfull `, {
         theme: "colored",
         position: "bottom-right",
