@@ -6,6 +6,7 @@ const app = express();
 
 const CollegeController = require("./Controller/CollegeController");
 const authRoutes = require("./Routes/Auth");
+const DashboardRoutes = require("./Routes/Dashboard");
 
 app.use(cors());
 app.use(express.json());
@@ -17,6 +18,7 @@ const mongo_password = process.env.MONGO_PASSWORD;
 const port = process.env.PORT;
 
 app.use("/auth", authRoutes);
+app.use("/", DashboardRoutes);
 
 app.get("/feedCollege", CollegeController.feedData);
 app.get("/feedCourses", CollegeController.feedCourses);

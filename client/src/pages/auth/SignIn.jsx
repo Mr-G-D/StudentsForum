@@ -32,7 +32,7 @@ export default function SignIn() {
       email: data.get("email"),
       password: data.get("password"),
     });
-    if (response.data === true) {
+    if (response.data) {
       window.location.href = "/dashboard";
       toast.success(`Log in Successfull `, {
         theme: "colored",
@@ -56,7 +56,8 @@ export default function SignIn() {
         progress: undefined,
       });
     }
-    console.log(response.data);
+    // console.log(response.data);
+    localStorage.setItem("token", response.data);
     // eslint-disable-next-line no-console
   };
 

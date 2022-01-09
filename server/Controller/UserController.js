@@ -1,7 +1,7 @@
 "use strict";
 const bcrypt = require("bcryptjs");
-const User = require("../Models/User");
 const jwt = require("jsonwebtoken");
+const User = require("../Models/User");
 
 exports.register = async (req, res, next) => {
   const user = await User.findOne({ email: req.body.emailID });
@@ -43,5 +43,21 @@ exports.login = async (req, res, next) => {
     res.send(token);
   } else {
     res.send("E-Mail ID not found");
+  }
+};
+
+exports.index = async (req, res, next) => {
+  const token = req.headers["x-access-token"];
+
+  console.log(token);
+  try {
+    const decoded = jwt.verify(token, process.env.APP_SECRET);
+    const email = decoded.email;
+    const user = await User.findOne({ email: email });
+
+    res.json({ status: "success", data: user });
+  } catch (error) {
+    console.log(error);
+    res.json({ status: "error", error: "Invalid Token" });
   }
 };
