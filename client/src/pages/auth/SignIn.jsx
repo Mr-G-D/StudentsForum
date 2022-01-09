@@ -28,7 +28,7 @@ export default function SignIn() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    const response = await axios.post("http://127.0.0.1:3001/auth/login", {
+    const response = await axios.post("http://127.0.0.1:3001/user/login", {
       email: data.get("email"),
       password: data.get("password"),
     });
