@@ -4,7 +4,7 @@ import SignUp from "./pages/auth/SignUp";
 
 export const authRoutes = [
   {
-    path: "/signin",
+    path: "/login",
     name: "signin",
     component: SignIn,
     layout: "/auth",

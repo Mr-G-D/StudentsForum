@@ -6,7 +6,12 @@ const AdminRoutes = () => {
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       return (
-        <Route exact path={prop.path} component={prop.component} key={key} />
+        <Route
+          exact
+          path={prop.layout + prop.path}
+          component={prop.component}
+          key={key}
+        />
       );
     });
   };
