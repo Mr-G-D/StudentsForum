@@ -10,8 +10,7 @@ function App() {
     <div className="App">
       <Router>
         <Route path="/auth" render={(props) => <AuthRoutes {...props} />} />
-
-        {<Route path="/" render={(props) => <AdminRoutes {...props} />} />}
+        <Route path="/" render={(props) => <AdminRoutes {...props} />} />
         <Route exact path="/" component={SignIn} />
       </Router>
     </div>
