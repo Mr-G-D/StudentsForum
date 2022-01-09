@@ -84,7 +84,7 @@ export default function SignUp() {
       return false;
     }
 
-    const response = await axios.post("http://127.0.0.1:3001/auth/register", {
+    const response = await axios.post("http://127.0.0.1:3001/user/register", {
       firstName: formValues.firstName,
       lastName: formValues.lastName,
       email: formValues.email,
@@ -95,7 +95,7 @@ export default function SignUp() {
       startDate: start,
       endDate: end,
     });
-    if (response.data.error === "Duplicate E-Mail") {
+    if (response.data.error === "User already exists") {
       toast.error(`E-Mail ID already in use `, {
         theme: "colored",
         position: "bottom-right",

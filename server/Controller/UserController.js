@@ -4,28 +4,34 @@ const jwt = require("jsonwebtoken");
 const User = require("../Models/User");
 
 exports.register = async (req, res, next) => {
-  const user = await User.findOne({ email: req.body.emailID });
-  if (user) {
-    res.json({ status: "error", error: "Duplicate E-Mail" });
-  } else {
-    try {
-      const hashedPassword = await bcrypt.hash(req.body.password, 12);
-      const newUser = await User.create({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        emailID: req.body.email,
-        password: hashedPassword,
-        dateOfBirth: req.body.dateOfBirth,
-        college: req.body.college,
-        course: req.body.course,
-        courseBegin: req.body.startDate,
-        courseEnd: req.body.endDate,
-      });
-      newUser.save();
-      res.json({ status: "success" });
-    } catch (err) {
-      res.json({ status: "error", error: err });
+  try {
+    const user = await User.findOne({ email: req.body.emailID });
+    if (user) {
+      return res
+        .status(400)
+        .json({ message: "error", error: "User already exists" });
     }
+    const hashedPassword = await bcrypt.hash(req.body.password, 12);
+    const newUser = await User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      emailID: req.body.email,
+      password: hashedPassword,
+      dateOfBirth: req.body.dateOfBirth,
+      college: req.body.college,
+      course: req.body.course,
+      courseBegin: req.body.startDate,
+      courseEnd: req.body.endDate,
+    });
+    const token = jwt.sign(
+      { email: user.email, id: user._id },
+      process.env.APP_SECRET,
+      { expiresIn: "1h" },
+    );
+    newUser.save();
+    res.status(200).json({ result: user, token });
+  } catch (error) {
+    res.status(500).json({ message: "error", error: err });
   }
 };
 
