@@ -4,34 +4,33 @@ const jwt = require("jsonwebtoken");
 const User = require("../Models/User");
 
 exports.register = async (req, res, next) => {
+  console.log(req.body.dob);
   try {
-    const user = await User.findOne({ email: req.body.emailID });
+    const user = await User.findOne({ emailID: req.body.formData.email });
     if (user) {
-      return res
-        .status(400)
-        .json({ message: "error", error: "User already exists" });
+      return res.json({ message: "error", error: "User already exists" });
     }
-    const hashedPassword = await bcrypt.hash(req.body.password, 12);
+    const hashedPassword = await bcrypt.hash(req.body.formData.password, 12);
     const newUser = await User.create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      emailID: req.body.email,
+      firstName: req.body.formData.firstName,
+      lastName: req.body.formData.lastName,
+      emailID: req.body.formData.email,
       password: hashedPassword,
-      dateOfBirth: req.body.dateOfBirth,
+      dateOfBirth: req.body.dob,
       college: req.body.college,
       course: req.body.course,
-      courseBegin: req.body.startDate,
-      courseEnd: req.body.endDate,
+      courseBegin: req.body.start,
+      courseEnd: req.body.end,
     });
     const token = jwt.sign(
-      { email: user.email, id: user._id },
+      { email: newUser.email, id: newUser._id },
       process.env.APP_SECRET,
       { expiresIn: "1h" },
     );
     newUser.save();
-    res.status(200).json({ result: user, token });
+    res.status(200).json({ result: newUser, token });
   } catch (error) {
-    res.status(500).json({ message: "error", error: err });
+    res.json({ message: "Something went wrong", error: error });
   }
 };
 
@@ -54,7 +53,7 @@ exports.login = async (req, res, next) => {
       { expiresIn: "1h" },
     );
 
-    return res.status(200).json({ result: user, token });
+    return res.json({ result: user, token: token, message: "success" });
   } catch (error) {
     res.json("Something went wrong");
   }

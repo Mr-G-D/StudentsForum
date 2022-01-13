@@ -20,7 +20,7 @@ const port = process.env.PORT;
 
 app.use("/auth", authRoutes);
 app.use("/", DashboardRoutes);
-app.use("/user", UserRoutes);
+app.use("/users", UserRoutes);
 
 app.get("/feedCollege", CollegeController.feedData);
 app.get("/feedCourses", CollegeController.feedCourses);

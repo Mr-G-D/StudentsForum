@@ -12,7 +12,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { IconButton, InputAdornment } from "@mui/material";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
@@ -42,34 +42,42 @@ export default function SignIn() {
     event.preventDefault();
 
     const response = await dispatch(signIn(formData, history));
-    console.log(response);
-    // if (response.status === 200) {
-    //   // window.location.href = "/dashboard";
-    //   toast.success(`Log in Successfull `, {
-    //     theme: "colored",
-    //     position: "bottom-right",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //   });
-    // } else {
-    //   toast.error(`Incorrect Password `, {
-    //     theme: "colored",
-    //     position: "bottom-right",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //   });
-    // }
-    // console.log(response.data);
-    // localStorage.setItem("token", response.data);
-    // eslint-disable-next-line no-console
+    if (response.data.message === "Invalid credentials") {
+      toast.error(`Incorrect Password `, {
+        theme: "colored",
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (response.data.message === "User does not exist") {
+      toast.error(`Incorrect E-Mail ID `, {
+        theme: "colored",
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (response.data.message === "success") {
+      window.location.href = "/dashboard";
+      toast.success(`Log in Successfull `, {
+        theme: "colored",
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    console.log(response.data.message);
   };
 
   const [passwordVisibility, setPasswordVisibility] = useState(false);

@@ -13,13 +13,23 @@ export const signIn = (formData, history) => async (dispatch) => {
   }
 };
 
-export const signUp = (formData, history) => async (dispatch) => {
-  try {
-    const { data } = await api.signUp(formData);
+export const signUp =
+  (formData, college, course, start, end, dob, history) => async (dispatch) => {
+    try {
+      const userData = {
+        formData,
+        college: college,
+        course: course,
+        start: start,
+        end: end,
+        dob: dob,
+      };
+      const { data } = await api.signUp(userData);
 
-    dispatch({ type: AUTH, data });
-    history.push("/dashboard");
-  } catch (error) {
-    console.log(error);
-  }
-};
+      const response = dispatch({ type: AUTH, data });
+      return response;
+      // history.push("/dashboard");
+    } catch (error) {
+      console.log(error);
+    }
+  };
