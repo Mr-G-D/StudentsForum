@@ -105,6 +105,9 @@ export default function SignUp() {
         progress: undefined,
       });
     }
+    if (response.data.message === "success") {
+      history.push("/");
+    }
   };
 
   const [formValues, setFormValues] = useState({

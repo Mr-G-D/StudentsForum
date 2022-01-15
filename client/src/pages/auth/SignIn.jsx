@@ -65,7 +65,7 @@ export default function SignIn() {
         progress: undefined,
       });
     } else if (response.data.message === "success") {
-      window.location.href = "/dashboard";
+      history.push("/");
       toast.success(`Log in Successfull `, {
         theme: "colored",
         position: "bottom-right",

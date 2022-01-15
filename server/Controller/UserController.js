@@ -28,7 +28,7 @@ exports.register = async (req, res, next) => {
       { expiresIn: "1h" },
     );
     newUser.save();
-    res.status(200).json({ result: newUser, token });
+    res.json({ result: newUser, token: token, message: "success" });
   } catch (error) {
     res.json({ message: "Something went wrong", error: error });
   }
