@@ -1,3 +1,4 @@
+import Navbar from "pages/admin/layouts/Navbar";
 import React from "react";
 import { Route } from "react-router-dom";
 import { adminRoutes } from "../routes";
@@ -11,7 +12,12 @@ const AdminRoutes = () => {
     });
   };
 
-  return <div>{getRoutes(adminRoutes)}</div>;
+  return (
+    <div>
+      <Navbar />
+      {getRoutes(adminRoutes)}
+    </div>
+  );
 };
 
 export default AdminRoutes;
