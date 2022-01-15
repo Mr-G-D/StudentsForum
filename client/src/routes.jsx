@@ -19,7 +19,7 @@ export const authRoutes = [
 
 export const adminRoutes = [
   {
-    path: "/dashboard",
+    path: "/",
     name: "dashboard",
     component: Dashboard,
     layout: "admin",

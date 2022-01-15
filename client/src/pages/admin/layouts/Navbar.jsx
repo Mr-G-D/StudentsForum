@@ -43,7 +43,7 @@ export default function Navbar() {
   const logout = () => {
     dispatch({ type: LOGOUT });
 
-    history.push("/");
+    history.push("/auth/login");
 
     setUser(null);
   };
