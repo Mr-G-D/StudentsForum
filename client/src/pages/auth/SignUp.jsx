@@ -25,10 +25,16 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import $ from "jquery";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { signUp } from "actions/auth";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const theme = createTheme();
 
 export default function SignUp() {
+  const history = useHistory;
+  const dispatch = useDispatch();
+
   const notify = (message) => {
     toast.error(`Please check your ${message} `, {
       theme: "colored",
@@ -84,32 +90,11 @@ export default function SignUp() {
       return false;
     }
 
-    const response = await axios.post("http://127.0.0.1:3001/auth/register", {
-      firstName: formValues.firstName,
-      lastName: formValues.lastName,
-      email: formValues.email,
-      password: formValues.password,
-      dateOfBirth: dob,
-      college: college,
-      course: course,
-      startDate: start,
-      endDate: end,
-    });
-    if (response.data.error === "Duplicate E-Mail") {
+    const response = await dispatch(
+      signUp(formValues, college, course, start, end, dob, history),
+    );
+    if (response.data.error === "User already exists") {
       toast.error(`E-Mail ID already in use `, {
-        theme: "colored",
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    }
-    if (response.data.status === "success") {
-      window.location.href = "/dashboard";
-      toast.success(`Registeration Successfull `, {
         theme: "colored",
         position: "bottom-right",
         autoClose: 5000,
@@ -454,7 +439,7 @@ export default function SignUp() {
             />
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="signin" variant="body2">
+                <Link href="login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

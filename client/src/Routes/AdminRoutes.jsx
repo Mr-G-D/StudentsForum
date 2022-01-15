@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { adminRoutes } from "../Routes";
+import { adminRoutes } from "../routes";
 
 const AdminRoutes = () => {
   const getRoutes = (routes) => {

@@ -12,27 +12,59 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import { IconButton, InputAdornment } from "@mui/material";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+import { signIn } from "actions/auth";
+import { useHistory } from "react-router-dom";
 // import  from "@mui/icons-material/Visibility";
 
 const theme = createTheme();
 
 export default function SignIn() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = async (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const dispatch = useDispatch();
+  const history = useHistory();
   const handlePasswordVisibility = () => {
     setPasswordVisibility(!passwordVisibility);
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
 
-    const response = await axios.post("http://127.0.0.1:3001/auth/login", {
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-    if (response.data === true) {
+    const response = await dispatch(signIn(formData, history));
+    if (response.data.message === "Invalid credentials") {
+      toast.error(`Incorrect Password `, {
+        theme: "colored",
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (response.data.message === "User does not exist") {
+      toast.error(`Incorrect E-Mail ID `, {
+        theme: "colored",
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (response.data.message === "success") {
       window.location.href = "/dashboard";
       toast.success(`Log in Successfull `, {
         theme: "colored",
@@ -44,20 +76,8 @@ export default function SignIn() {
         draggable: true,
         progress: undefined,
       });
-    } else {
-      toast.error(`Incorrect Password `, {
-        theme: "colored",
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
     }
-    console.log(response.data);
-    // eslint-disable-next-line no-console
+    console.log(response.data.message);
   };
 
   const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -105,6 +125,7 @@ export default function SignIn() {
               sx={{ mt: 1 }}
             >
               <TextField
+                onChange={handleChange}
                 margin="normal"
                 required
                 fullWidth
@@ -115,6 +136,7 @@ export default function SignIn() {
                 autoFocus
               />
               <TextField
+                onChange={handleChange}
                 margin="normal"
                 required
                 fullWidth
@@ -172,7 +194,7 @@ export default function SignIn() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="signup" variant="body2">
+                  <Link href="/auth/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
