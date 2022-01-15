@@ -7,7 +7,6 @@ export const signIn = (formData, history) => async (dispatch) => {
 
     const response = dispatch({ type: AUTH, data });
     return response;
-    // history.push("/dashboard");
   } catch (error) {
     console.log(error);
   }
@@ -28,7 +27,6 @@ export const signUp =
 
       const response = dispatch({ type: AUTH, data });
       return response;
-      // history.push("/dashboard");
     } catch (error) {
       console.log(error);
     }

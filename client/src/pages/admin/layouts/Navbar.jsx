@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,14 +13,39 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Sidebar from "./Sidebar";
+import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { LOGOUT } from "constants/actionTypes";
+import { useHistory } from "react-router-dom";
 
 export default function Navbar() {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("profile")));
+    if (user === null) {
+      logout();
+    }
+    //eslint-disable-next-line
+  }, [location]);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
 
   const showSidebar = () => {
     setOpen(true);
+  };
+
+  const logout = () => {
+    dispatch({ type: LOGOUT });
+
+    history.push("/");
+
+    setUser(null);
   };
 
   const isMenuOpen = Boolean(anchorEl);
@@ -61,7 +86,7 @@ export default function Navbar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      <MenuItem onClick={logout}>Logout</MenuItem>
     </Menu>
   );
 
