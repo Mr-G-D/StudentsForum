@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import {
+  Box,
+  Drawer,
+  List,
+  Divider,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import "styles/layouts/Sidebar.css";
+import { Assessment, CastForEducation, Person } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 export default function Sidebar(props) {
   const [state, setState] = useState(false);
@@ -39,14 +41,30 @@ export default function Sidebar(props) {
           onKeyDown={toggleDrawer(false)}
         >
           <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-              <ListItem button key={text}>
+            <Link className="link" to="/">
+              <ListItem button key="Dashboard">
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  <Assessment />
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary="Dashboard" />
               </ListItem>
-            ))}
+            </Link>
+            <Link className="link" to="students">
+              <ListItem button key="Students">
+                <ListItemIcon>
+                  <Person />
+                </ListItemIcon>
+                <ListItemText primary="Students" />
+              </ListItem>
+            </Link>
+            <Link className="link" to="courses">
+              <ListItem button key="Courses">
+                <ListItemIcon>
+                  <CastForEducation />
+                </ListItemIcon>
+                <ListItemText primary="Courses" />
+              </ListItem>
+            </Link>
           </List>
           <Divider />
         </Box>

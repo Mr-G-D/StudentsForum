@@ -1,4 +1,4 @@
-import Dashboard from "./pages/admin/Dashboard";
+import Dashboard from "./pages/admin/Dashboard/index";
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
 
