@@ -5,7 +5,7 @@ import "styles/admin/dashboard/statbox.css";
 const StatBox = (props) => {
   return (
     <Grid container className="statBox">
-      <Grid flex={6}>
+      <Grid className="main" flex={6}>
         <Typography className="title" variant="subtitle1">
           {props.data}
         </Typography>

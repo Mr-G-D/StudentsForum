@@ -17,7 +17,7 @@ const Dashboard = () => {
             icon="/assets/images/graduated.png"
           />
         </Grid>
-        <Grid flex={2} className="graph">
+        <Grid flex={3} className="graph">
           Graph
         </Grid>
       </Box>
