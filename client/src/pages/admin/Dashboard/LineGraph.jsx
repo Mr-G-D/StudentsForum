@@ -292,7 +292,7 @@ const LineGraph = () => {
         }}
       >
         <XAxis dataKey="date" />
-        <YAxis dataKey="price" />
+        <YAxis />
         <Tooltip />
         <Line
           type="monotone"
