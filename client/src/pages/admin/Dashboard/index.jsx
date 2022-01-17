@@ -9,13 +9,7 @@ const Dashboard = () => {
     <div>
       <Navbar />
       <Box className="item">
-        <Grid
-          sm={{
-            display: "flex",
-          }}
-          flex={1}
-          className="box"
-        >
+        <Grid flex={1} className="box">
           <StatBox data="Students" count={500} icon="/assets/images/chat.png" />
           <StatBox
             data="students"
