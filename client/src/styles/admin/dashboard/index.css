@@ -1,0 +1,11 @@
+.item {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
+.box {
+  margin: 30px;
+  padding: 20px;
+  border-radius: 10px;
+}
