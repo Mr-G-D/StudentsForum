@@ -3,6 +3,7 @@ import React from "react";
 import Navbar from "../layouts/Navbar";
 import "styles/admin/dashboard/index.css";
 import StatBox from "./StatBox";
+import AreaGraph from "./AreaGraph";
 
 const Dashboard = () => {
   return (
@@ -10,7 +11,7 @@ const Dashboard = () => {
       <Navbar />
       <Box className="item">
         <Grid flex={3} className="graph">
-          Graph
+          <AreaGraph />
         </Grid>
         <Grid flex={1} className="box">
           <StatBox data="Students" count={500} icon="/assets/images/chat.png" />
