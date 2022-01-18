@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import Navbar from "../layouts/Navbar";
 import "styles/admin/dashboard/index.css";
@@ -11,10 +11,17 @@ const Dashboard = () => {
       <Navbar />
       <Box className="item">
         <Grid flex={3} className="graph">
+          <Typography className="graphTitle" variant="subtitle1">
+            Discussions Overview
+          </Typography>
           <AreaGraph />
         </Grid>
         <Grid flex={1} className="box">
-          <StatBox data="Students" count={500} icon="/assets/images/chat.png" />
+          <StatBox
+            data="Discussions"
+            count={500}
+            icon="/assets/images/chat.png"
+          />
           <StatBox
             data="students"
             count={300}

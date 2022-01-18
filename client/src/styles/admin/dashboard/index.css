@@ -17,3 +17,11 @@
   margin: 10px 30px 0px 5px;
   padding: 10px 0px;
 }
+.graphTitle {
+  color: rgb(103, 116, 142);
+  font-weight: 600 !important;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  text-transform: capitalize;
+  margin: 0px 0px 3% 3% !important;
+}
