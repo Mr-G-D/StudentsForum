@@ -9,6 +9,9 @@ const Dashboard = () => {
     <div>
       <Navbar />
       <Box className="item">
+        <Grid flex={3} className="graph">
+          Graph
+        </Grid>
         <Grid flex={1} className="box">
           <StatBox data="Students" count={500} icon="/assets/images/chat.png" />
           <StatBox
@@ -16,9 +19,6 @@ const Dashboard = () => {
             count={300}
             icon="/assets/images/graduated.png"
           />
-        </Grid>
-        <Grid flex={3} className="graph">
-          Graph
         </Grid>
       </Box>
     </div>
