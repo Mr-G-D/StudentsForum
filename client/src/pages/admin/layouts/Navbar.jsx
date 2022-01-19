@@ -23,7 +23,6 @@ export default function Navbar() {
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
-  console.log(user);
 
   const avatarURL = `https://ui-avatars.com/api/?size=32&background=random&rounded=true&color=ffffff&name=${
     user.result.firstName + "+" + user.result.lastName

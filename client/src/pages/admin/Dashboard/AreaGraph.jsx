@@ -5,6 +5,7 @@ import {
   Area,
   AreaChart,
   CartesianGrid,
+  Legend,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -16,7 +17,7 @@ const data = [];
 for (let index = 30; index >= 0; index--) {
   data.push({
     date: subDays(new Date(), index).toISOString().substring(0, 10),
-    price: Math.floor(Math.random(0, 100) * 100),
+    Queries: Math.floor(Math.random(0, 100) * 100),
   });
 }
 const AreaGraph = () => {
@@ -32,7 +33,7 @@ const AreaGraph = () => {
         <Area
           stroke="#2451B7"
           type="monotone"
-          dataKey="price"
+          dataKey="Queries"
           fill="url(#color)"
         />
         <XAxis
@@ -44,12 +45,13 @@ const AreaGraph = () => {
           }}
         />
         <YAxis
-          dataKey="price"
+          dataKey="Queries"
           axisLine={false}
           tickLine={false}
-          tickCount={4}
+          tickCount={6}
         />
         <Tooltip content={<CustomTooltip />} />
+        <Legend />
         <CartesianGrid opacity={0.4} vertical={false} />
       </AreaChart>
     </ResponsiveContainer>
@@ -63,7 +65,7 @@ const CustomTooltip = ({ active, payload, label }) => {
     return (
       <div className="tooltip">
         <h4>{format(parseISO(label), "eeee, d MMM, yyyy")}</h4>
-        <p>Price: ${payload[0]?.payload.price}</p>
+        <p>Queries: {payload[0]?.payload.Queries}</p>
       </div>
     );
   } else {

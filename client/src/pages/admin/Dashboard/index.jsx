@@ -4,6 +4,7 @@ import Navbar from "../layouts/Navbar";
 import "styles/admin/dashboard/index.css";
 import StatBox from "./StatBox";
 import AreaGraph from "./AreaGraph";
+import PieChart from "./PieGraph";
 
 const Dashboard = () => {
   return (
@@ -30,9 +31,12 @@ const Dashboard = () => {
           <Grid className="notes">Notes</Grid>
         </Grid>
       </Grid>
-      <Grid gap={1} container display="flex">
+      <Grid className="item" container display="flex">
         <Grid className="container" flex={1}>
-          Pie Chart
+          <Typography className="graphTitle" variant="subtitle1">
+            Discussions Status
+          </Typography>
+          <PieChart />
         </Grid>
         <Grid className="container" flex={2}>
           Activity Logs
