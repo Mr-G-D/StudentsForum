@@ -11,13 +11,15 @@ import {
 const data = [
   {
     name: "Closed",
-    value: 2400,
+    value: 50,
   },
   {
     name: "Open",
-    value: 4567,
+    value: 450,
   },
 ];
+
+const total = 500;
 const PieGraph = () => {
   return (
     <ResponsiveContainer width="100%" height={250}>
@@ -28,19 +30,16 @@ const PieGraph = () => {
           nameKey="name"
           innerRadius={60}
           outerRadius={80}
-          label
+          label={(data) => {
+            return ((data?.value / total) * 100).toFixed(2) + "%";
+          }}
         >
-          {data.map(
-            (entry, index) => (
-              console.log(entry),
-              (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={entry?.name === "Closed" ? "#00d200" : "#1976d2"}
-                />
-              )
-            ),
-          )}
+          {data.map((entry, index) => (
+            <Cell
+              key={`cell-${index}`}
+              fill={entry?.name === "Closed" ? "#00d200" : "#1976d2"}
+            />
+          ))}
         </Pie>
         <Tooltip />
         <Legend />
@@ -50,15 +49,3 @@ const PieGraph = () => {
 };
 
 export default PieGraph;
-const CustomTooltip = ({ active, payload, label }) => {
-  if (active) {
-    return (
-      <div className="tooltip">
-        <h4>label</h4>
-        <p>Price: ${payload[0]?.payload.price}</p>
-      </div>
-    );
-  } else {
-    return null;
-  }
-};
