@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import React from "react";
 import Navbar from "../layouts/Navbar";
 import "styles/admin/dashboard/index.css";
@@ -9,8 +9,8 @@ const Dashboard = () => {
   return (
     <div>
       <Navbar />
-      <Box className="item">
-        <Grid flex={3} className="graph">
+      <Grid container display="flex" className="item">
+        <Grid flex={3} className="container">
           <Typography className="graphTitle" variant="subtitle1">
             Discussions Overview
           </Typography>
@@ -27,8 +27,17 @@ const Dashboard = () => {
             count={300}
             icon="/assets/images/graduated.png"
           />
+          <Grid className="notes">Notes</Grid>
         </Grid>
-      </Box>
+      </Grid>
+      <Grid gap={1} container display="flex">
+        <Grid className="container" flex={1}>
+          Pie Chart
+        </Grid>
+        <Grid className="container" flex={2}>
+          Activity Logs
+        </Grid>
+      </Grid>
     </div>
   );
 };
