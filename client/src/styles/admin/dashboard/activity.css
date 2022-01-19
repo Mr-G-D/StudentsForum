@@ -1,0 +1,11 @@
+.row {
+  margin: 1%;
+}
+.rowItem {
+  text-align-last: center;
+}
+.assignee {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+}

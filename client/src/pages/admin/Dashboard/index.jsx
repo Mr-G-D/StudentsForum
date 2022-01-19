@@ -4,7 +4,8 @@ import Navbar from "../layouts/Navbar";
 import "styles/admin/dashboard/index.css";
 import StatBox from "./StatBox";
 import AreaGraph from "./AreaGraph";
-import PieChart from "./PieGraph";
+import Activity from "./Activity";
+import PieGraph from "./PieGraph";
 
 const Dashboard = () => {
   return (
@@ -36,10 +37,17 @@ const Dashboard = () => {
           <Typography className="graphTitle" variant="subtitle1">
             Discussions Status
           </Typography>
-          <PieChart />
+          <PieGraph />
         </Grid>
         <Grid className="container" flex={2}>
-          Activity Logs
+          <Typography
+            sx={{ marginBottom: "1%" }}
+            className="activityTitle"
+            variant="subtitle1"
+          >
+            Recent Activity
+          </Typography>
+          <Activity />
         </Grid>
       </Grid>
     </div>
