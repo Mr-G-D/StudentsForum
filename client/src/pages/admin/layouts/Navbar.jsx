@@ -23,7 +23,11 @@ export default function Navbar() {
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
+  console.log(user);
 
+  const avatarURL = `https://ui-avatars.com/api/?size=32&background=random&rounded=true&color=ffffff&name=${
+    user.result.firstName + "+" + user.result.lastName
+  }`;
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
     if (user === null) {
@@ -191,7 +195,8 @@ export default function Navbar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <img src={avatarURL} alt="avatar" />
+              {/* https://ui-avatars.com/api/?background=random&rounded=true&color=ffffff&name= */}
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
