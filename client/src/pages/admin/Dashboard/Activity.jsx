@@ -18,7 +18,7 @@ function createData(action, assignee, subject, time) {
 const rows = [
   createData("Started a new Discussion", "John Doe", "Hostel", "3 seconds ago"),
   createData(
-    "Contrinuted to a Discussion",
+    "Contributed to a Discussion",
     "Mary Jane",
     "Mess",
     "6 minutes ago",

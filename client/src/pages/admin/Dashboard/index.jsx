@@ -29,7 +29,7 @@ const Dashboard = () => {
             count={300}
             icon="/assets/images/graduated.png"
           />
-          <StatBox data="Tags" count={7} icon="/assets/images/graduated.png" />
+          <StatBox data="Tags" count={7} icon="/assets/images/tag.png" />
         </Grid>
       </Grid>
       <Grid className="item" container display="flex">

@@ -5,7 +5,6 @@ import {
   Area,
   AreaChart,
   CartesianGrid,
-  Legend,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -51,7 +50,6 @@ const AreaGraph = () => {
           tickCount={6}
         />
         <Tooltip content={<CustomTooltip />} />
-        <Legend />
         <CartesianGrid opacity={0.4} vertical={false} />
       </AreaChart>
     </ResponsiveContainer>
