@@ -32,7 +32,7 @@ import { getColleges, getCourses } from "api/main";
 const theme = createTheme();
 
 export default function SignUp() {
-  const history = useHistory;
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const notify = (message) => {
@@ -115,7 +115,7 @@ export default function SignUp() {
     lastName: "",
     email: "",
     password: "",
-    submit: true,
+    admin: true,
   });
   const [start, setStart] = useState(null);
   const [end, setEnd] = useState(null);

@@ -65,7 +65,9 @@ export default function SignIn() {
         progress: undefined,
       });
     } else if (response.data.message === "success") {
-      history.push("/");
+      if (response.data.result.admin) {
+        history.push("/");
+      }
       toast.success(`Log in Successfull `, {
         theme: "colored",
         position: "bottom-right",
@@ -77,7 +79,6 @@ export default function SignIn() {
         progress: undefined,
       });
     }
-    console.log(response.data.message);
   };
 
   const [passwordVisibility, setPasswordVisibility] = useState(false);

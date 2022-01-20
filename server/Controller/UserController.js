@@ -21,6 +21,7 @@ exports.register = async (req, res, next) => {
       course: req.body.course,
       courseBegin: req.body.start,
       courseEnd: req.body.end,
+      admin: req.body.formData.admin,
     });
     const token = jwt.sign(
       { email: newUser.email, id: newUser._id },

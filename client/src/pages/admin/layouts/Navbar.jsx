@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { LOGOUT } from "constants/actionTypes";
 import { useHistory } from "react-router-dom";
+import jsonwebtoken from "jsonwebtoken";
 
 export default function Navbar() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -26,7 +27,10 @@ export default function Navbar() {
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
-    if (user === null) {
+    if (jsonwebtoken.decode(user.token).id !== user.result._id) {
+      logout();
+    }
+    if (!user.result.admin) {
       logout();
     }
     //eslint-disable-next-line

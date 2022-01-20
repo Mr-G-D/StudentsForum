@@ -58,7 +58,7 @@ const Activity = () => {
         <TableHead>
           <TableRow>
             <TableCell>Action</TableCell>
-            <TableCell align="center">Asignee</TableCell>
+            <TableCell align="left">Asignee</TableCell>
             <TableCell align="center">Subject</TableCell>
             <TableCell align="center">Time</TableCell>
             <TableCell align="center">Manage</TableCell>
@@ -73,7 +73,7 @@ const Activity = () => {
               <TableCell component="th" scope="row">
                 {row.action}
               </TableCell>
-              <TableCell className="assignee" align="center">
+              <TableCell className="assignee" align="left">
                 <img
                   src={avatarURL + row.assignee}
                   alt="avatar"
