@@ -14,3 +14,10 @@ API.interceptors.request.use((req) => {
 
 export const signIn = (formData) => API.post("/users/login", formData);
 export const signUp = (formData) => API.post("/users/register", formData);
+export const getColleges = () => API.get("/auth/getColleges");
+export const getCourses = (college) =>
+  API.get("auth/getCourses", {
+    params: {
+      college: college,
+    },
+  });

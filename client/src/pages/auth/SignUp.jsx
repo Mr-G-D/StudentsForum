@@ -15,7 +15,6 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "../../styles/auth/signup.css";
-import axios from "axios";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import InputAdornment from "@mui/material/InputAdornment";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
@@ -28,6 +27,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { signUp } from "actions/auth";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { getColleges, getCourses } from "api/main";
 
 const theme = createTheme();
 
@@ -131,22 +131,16 @@ export default function SignUp() {
   let colleges = [];
   let courses = [];
   useEffect(() => {
-    axios.get("http://127.0.0.1:3001/auth/getColleges").then((response) => {
+    getColleges().then((response) => {
       response.data.forEach((element) => {
         colleges.push(element.CollegeName);
       });
       if (college !== null) {
-        axios
-          .get(`http://127.0.0.1:3001/auth/getCourses`, {
-            params: {
-              college: college,
-            },
-          })
-          .then((response) => {
-            response.data.forEach((element) => {
-              courses.push(element);
-            });
+        getCourses(college).then((response) => {
+          response.data.forEach((element) => {
+            courses.push(element);
           });
+        });
       }
     }, []);
   });
