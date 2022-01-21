@@ -194,9 +194,9 @@
     "supports-color" "^7.1.0"
 
 "chokidar@^3.5.2":
-  "integrity" "sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ=="
-  "resolved" "https://registry.npmjs.org/chokidar/-/chokidar-3.5.2.tgz"
-  "version" "3.5.2"
+  "integrity" "sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw=="
+  "resolved" "https://registry.npmjs.org/chokidar/-/chokidar-3.5.3.tgz"
+  "version" "3.5.3"
   dependencies:
     "anymatch" "~3.1.2"
     "braces" "~3.0.2"
@@ -356,10 +356,10 @@
   dependencies:
     "is-obj" "^2.0.0"
 
-"dotenv@^10.0.0":
-  "integrity" "sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q=="
-  "resolved" "https://registry.npmjs.org/dotenv/-/dotenv-10.0.0.tgz"
-  "version" "10.0.0"
+"dotenv@^14.2.0":
+  "integrity" "sha512-05POuPJyPpO6jqzTNweQFfAyMSD4qa4lvsMOWyTRTdpHKy6nnnN+IYWaXF+lHivhBH/ufDKlR4IWCAN3oPnHuw=="
+  "resolved" "https://registry.npmjs.org/dotenv/-/dotenv-14.2.0.tgz"
+  "version" "14.2.0"
 
 "duplexer3@^0.1.4":
   "integrity" "sha1-7gHdHKwO08vH/b6jfcCo8c4ALOI="
@@ -863,9 +863,9 @@
     "saslprep" "^1.0.3"
 
 "mongoose@^6.0.11":
-  "integrity" "sha512-0rRxTBoqMSuQF/YM3TEvbHn8Ybnd9dRjD7DItEjCXK0vwC/muLKXZ4rVCN4KAnWQAkwYzoWw2tXAy0YF6TUdEg=="
-  "resolved" "https://registry.npmjs.org/mongoose/-/mongoose-6.1.5.tgz"
-  "version" "6.1.5"
+  "integrity" "sha512-GqU/G/5yu/CWBHdW24cfGPsW4rADER+eeXj+bwvb6mLjg6uAASl8GnE6pmEbafZJ4Uv9V7jf5LaBMJMNwvQEtg=="
+  "resolved" "https://registry.npmjs.org/mongoose/-/mongoose-6.1.7.tgz"
+  "version" "6.1.7"
   dependencies:
     "@types/node" "< 17.0.6"
     "bson" "^4.2.2"
