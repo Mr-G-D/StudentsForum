@@ -198,7 +198,6 @@ export default function Navbar() {
               color="inherit"
             >
               <img src={avatarURL} alt="avatar" />
-              {/* https://ui-avatars.com/api/?background=random&rounded=true&color=ffffff&name= */}
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
