@@ -1,3 +1,12 @@
 body {
   background-color: #fafafa;
 }
+.subtitle {
+  justify-content: space-between;
+}
+.select-user {
+  align-items: center;
+}
+.select-user Typography {
+  margin: 0px 1rem;
+}
