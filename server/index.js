@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const app = express();
 
-const CollegeController = require("./Controller/CollegeController");
+const HomeController = require("./Controller/HomeController");
 const authRoutes = require("./Routes/Auth");
 const DashboardRoutes = require("./Routes/Dashboard");
 const UserRoutes = require("./Routes/Users");
@@ -22,9 +22,11 @@ app.use("/auth", authRoutes);
 app.use("/", DashboardRoutes);
 app.use("/users", UserRoutes);
 
-app.get("/feedCollege", CollegeController.feedData);
-app.get("/feedCourses", CollegeController.feedCourses);
-app.get("/setCourses", CollegeController.setCourses);
+// app.get("/feedCollege", HomeController.feedData);
+// app.get("/feedCourses", HomeController.feedCourses);
+// app.get("/setCourses", HomeController.setCourses);
+// app.get("/feedUsers", HomeController.feedUsers);
+// app.get("/deleteUsers", HomeController.deleteUsers);
 
 app.listen(port, async function () {
   await mongoose.connect(

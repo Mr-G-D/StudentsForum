@@ -2,9 +2,11 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../Models/User");
+const axios = require("axios");
+const Colleges = require("../Models/Colleges");
+const Course = require("../Models/Course");
 
 exports.register = async (req, res, next) => {
-  console.log(req.body.dob);
   try {
     const user = await User.findOne({ emailID: req.body.formData.email });
     if (user) {
