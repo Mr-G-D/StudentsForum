@@ -21,3 +21,9 @@ export const getCourses = (college) =>
       college: college,
     },
   });
+export const fetchUsers = (type) =>
+  API.get("/users/fetchUsers", {
+    params: {
+      type: type,
+    },
+  });

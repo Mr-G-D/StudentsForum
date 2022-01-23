@@ -19,3 +19,6 @@ body {
 .select-user Typography {
   margin: 0px 1rem;
 }
+.manage-button {
+  padding: 0% !important;
+}

@@ -81,7 +81,7 @@ exports.index = async (req, res, next) => {
 exports.fetchUser = async (req, res) => {
   const type = req.query.type;
   const response = await User.find({ admin: type }).select({
-    _id: -1,
+    _id: 0,
   });
-  res.se;
+  res.json(response);
 };

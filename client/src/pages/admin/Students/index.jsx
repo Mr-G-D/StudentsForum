@@ -35,7 +35,7 @@ const Students = () => {
             </Select>
           </Box>
         </Grid>
-        <Table />
+        <Table user={user} />
       </Box>
     </div>
   );
