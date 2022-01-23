@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import Navbar from "pages/admin/layouts/Navbar";
 import { Box, Button, Grid, MenuItem, Select, Typography } from "@mui/material";
 import "styles/admin/students/index.css";
+import Table from "pages/admin/Students/Table";
 
 const Students = () => {
   const [user, setUser] = useState("Students");
   return (
     <div>
       <Navbar />
-      <Box className="container">
+      <Box className="paper">
         <Typography fontFamily="serif" variant="h4">
           {user}
         </Typography>
@@ -34,6 +35,7 @@ const Students = () => {
             </Select>
           </Box>
         </Grid>
+        <Table />
       </Box>
     </div>
   );
