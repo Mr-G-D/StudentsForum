@@ -9,7 +9,7 @@ const Course = require("../Models/Course");
 exports.getColleges = (req, res, next) => {
   const data = Colleges.find({}, (err, resu) => {
     res.send(resu);
-  }).select("CollegeName");
+  }).select({ CollegeName: 1, _id: 0 });
 };
 
 exports.getCourses = async (req, res, next) => {

@@ -7,6 +7,6 @@ const { login, register, fetchUser } = require("../Controller/UserController");
 router.post("/login", login);
 router.post("/register", register);
 
-router.get("/fetchUsers", auth, fetchUser);
+router.get("/fetchUsers", fetchUser);
 
 module.exports = router;
