@@ -4,8 +4,10 @@ import { Box, Button, Grid, MenuItem, Select, Typography } from "@mui/material";
 import "styles/admin/students/index.css";
 import Table from "pages/admin/Students/Table";
 import { PersonAdd } from "@mui/icons-material";
+import { Link, useLocation } from "react-router-dom";
 
 const Students = () => {
+  const location = useLocation();
   const [user, setUser] = useState("Students");
   return (
     <div>
@@ -16,7 +18,8 @@ const Students = () => {
         </Typography>
         <Grid className="subtitle" display="flex">
           <Box className="create-admin">
-            {user === "Admin" ? (
+            {/* {user === "Admin" ? ( */}
+            <Link className="link" to={`${location.pathname}/create`}>
               <Button variant="contained">
                 <PersonAdd
                   fontSize="small"
@@ -26,12 +29,15 @@ const Students = () => {
                 />
                 Create New Admin
               </Button>
-            ) : (
+            </Link>
+            {/* ) : (
               ""
-            )}
+            )} */}
           </Box>
-          <Box className="select-user" display="flex" gap={0.5}>
-            <Typography variant="subtitle1">The List below is of</Typography>
+          <Box className="select-user" display="flex" gap={1}>
+            <Typography variant="subtitle1">
+              Which type of user would you like to see?
+            </Typography>
 
             <Select
               className="select"

@@ -22,3 +22,6 @@ body {
 .manage-button {
   padding: 0% !important;
 }
+Link {
+  text-decoration: none !important;
+}
