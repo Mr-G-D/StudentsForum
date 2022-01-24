@@ -3,6 +3,7 @@ import Navbar from "pages/admin/layouts/Navbar";
 import { Box, Button, Grid, MenuItem, Select, Typography } from "@mui/material";
 import "styles/admin/students/index.css";
 import Table from "pages/admin/Students/Table";
+import { PersonAdd } from "@mui/icons-material";
 
 const Students = () => {
   const [user, setUser] = useState("Students");
@@ -15,7 +16,19 @@ const Students = () => {
         </Typography>
         <Grid className="subtitle" display="flex">
           <Box className="create-admin">
-            <Button variant="contained">Create New Admin</Button>
+            {user === "Admin" ? (
+              <Button variant="contained">
+                <PersonAdd
+                  fontSize="small"
+                  sx={{
+                    marginRight: "4px",
+                  }}
+                />
+                Create New Admin
+              </Button>
+            ) : (
+              ""
+            )}
           </Box>
           <Box className="select-user" display="flex" gap={0.5}>
             <Typography variant="subtitle1">The List below is of</Typography>
