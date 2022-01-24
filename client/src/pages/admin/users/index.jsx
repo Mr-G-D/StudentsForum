@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import Navbar from "pages/admin/layouts/Navbar";
 import { Box, Button, Grid, MenuItem, Select, Typography } from "@mui/material";
 import "styles/admin/students/index.css";
-import Table from "pages/admin/Students/Table";
+import Table from "pages/admin/users/Table";
 import { PersonAdd } from "@mui/icons-material";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Students = () => {
-  const location = useLocation();
+const Users = () => {
   const [user, setUser] = useState("Students");
   return (
     <div>
@@ -19,7 +18,7 @@ const Students = () => {
         <Grid className="subtitle" display="flex">
           <Box className="create-admin">
             {/* {user === "Admin" ? ( */}
-            <Link className="link" to={`${location.pathname}/create`}>
+            <Link className="link" to="users/create">
               <Button variant="contained">
                 <PersonAdd
                   fontSize="small"
@@ -60,4 +59,4 @@ const Students = () => {
   );
 };
 
-export default Students;
+export default Users;

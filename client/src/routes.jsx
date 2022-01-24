@@ -1,5 +1,5 @@
-import Students from "pages/admin/Students";
 import Dashboard from "pages/admin/Dashboard";
+import Users from "pages/admin/users";
 import SignIn from "pages/auth/SignIn";
 import SignUp from "pages/auth/SignUp";
 
@@ -21,14 +21,14 @@ export const authRoutes = [
 export const adminRoutes = [
   {
     path: "/",
-    name: "dashboard",
-    component: Dashboard,
-    layout: "admin",
+    // name: "dashboard",
+    element: Dashboard,
+    // layout: "admin",
   },
   {
-    path: "/students",
-    name: "students",
-    component: Students,
-    layout: "admin",
+    path: "/users",
+    // name: "users",
+    element: Users,
+    // layout: "admin",
   },
 ];
