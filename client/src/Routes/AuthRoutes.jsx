@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { authRoutes } from "../routes";
 
 const AuthRoutes = () => {
@@ -15,7 +15,7 @@ const AuthRoutes = () => {
     });
   };
 
-  return <Routes>{getRoutes(authRoutes)}</Routes>;
+  return <div>{getRoutes(authRoutes)}</div>;
 };
 
 export default AuthRoutes;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useRoutes } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { adminRoutes } from "../routes";
 
 const AdminRoutes = () => {
@@ -11,7 +11,7 @@ const AdminRoutes = () => {
     });
   };
 
-  return <Routes>{useRoutes(adminRoutes)}</Routes>;
+  return <div>{getRoutes(adminRoutes)}</div>;
 };
 
 export default AdminRoutes;

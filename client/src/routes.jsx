@@ -21,14 +21,14 @@ export const authRoutes = [
 export const adminRoutes = [
   {
     path: "/",
-    // name: "dashboard",
-    element: Dashboard,
-    // layout: "admin",
+    name: "dashboard",
+    component: Dashboard,
+    layout: "admin",
   },
   {
     path: "/users",
-    // name: "users",
-    element: Users,
-    // layout: "admin",
+    name: "users",
+    component: Users,
+    layout: "admin",
   },
 ];
