@@ -6,7 +6,6 @@ const app = express();
 
 const HomeController = require("./Controller/HomeController");
 const authRoutes = require("./Routes/Auth");
-const DashboardRoutes = require("./Routes/Dashboard");
 const UserRoutes = require("./Routes/Users");
 
 app.use(cors());
@@ -19,7 +18,6 @@ const mongo_password = process.env.MONGO_PASSWORD;
 const port = process.env.PORT;
 
 app.use("/auth", authRoutes);
-app.use("/", DashboardRoutes);
 app.use("/users", UserRoutes);
 
 // app.get("/feedCollege", HomeController.feedData);

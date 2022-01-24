@@ -49,7 +49,7 @@ export default function Sidebar(props) {
                 <ListItemText primary="Dashboard" />
               </ListItem>
             </Link>
-            <Link className="link" to="users">
+            <Link className="link" to="/users">
               <ListItem button key="users">
                 <ListItemIcon>
                   <Person />
@@ -57,7 +57,7 @@ export default function Sidebar(props) {
                 <ListItemText primary="Users" />
               </ListItem>
             </Link>
-            <Link className="link" to="courses">
+            <Link className="link" to="/courses">
               <ListItem button key="Courses">
                 <ListItemIcon>
                   <CastForEducation />

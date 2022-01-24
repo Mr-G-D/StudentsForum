@@ -7,7 +7,7 @@ import { PersonAdd } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const Users = () => {
-  const [user, setUser] = useState("Students");
+  const [user, setUser] = useState("Admin");
   return (
     <div>
       <Navbar />
@@ -17,26 +17,26 @@ const Users = () => {
         </Typography>
         <Grid className="subtitle" display="flex">
           <Box className="create-admin">
-            {/* {user === "Admin" ? ( */}
-            <Link className="link" to="users/create">
-              <Button variant="contained">
-                <PersonAdd
-                  fontSize="small"
-                  sx={{
-                    marginRight: "4px",
-                  }}
-                />
-                Create New Admin
-              </Button>
-            </Link>
-            {/* ) : (
+            {user === "Admin" ? (
+              <Link className="link" to="admin/create">
+                <Button variant="contained">
+                  <PersonAdd
+                    fontSize="small"
+                    sx={{
+                      marginRight: "4px",
+                    }}
+                  />
+                  Create New Admin
+                </Button>
+              </Link>
+            ) : (
               ""
-            )} */}
+            )}
           </Box>
           <Box className="select-user" display="flex" gap={1}>
-            <Typography variant="subtitle1">
+            {/* <Typography variant="subtitle1">
               Which type of user would you like to see?
-            </Typography>
+            </Typography> */}
 
             <Select
               className="select"
