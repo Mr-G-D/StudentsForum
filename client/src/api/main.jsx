@@ -28,4 +28,11 @@ export const fetchUsers = (type) =>
     },
   });
 export const createAdmin = (formValues, college, course, start, end, dob) =>
-  API.post("/users/admin/create", formValues, college, course, start, end, dob);
+  API.post("/users/admin/create", {
+    formValues,
+    college: college,
+    course: course,
+    start: start,
+    end: end,
+    dob: dob,
+  });

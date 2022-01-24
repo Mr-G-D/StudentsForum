@@ -83,3 +83,26 @@ exports.fetchUser = async (req, res) => {
   });
   res.json(response);
 };
+
+exports.createAdmin = async (req, res) => {
+  const user = await User.findOne({ emailID: req.body.formValues.email });
+
+  if (!user) {
+    return res.json({ message: "User does not exist" });
+  }
+  const hashedPassword = await bcrypt.hash(req.body.formValues.password, 12);
+  const newUser = await User.create({
+    firstName: req.body.formValues.firstName,
+    lastName: req.body.formValues.lastName,
+    emailID: req.body.formValues.email,
+    password: hashedPassword,
+    dateOfBirth: req.body.dob,
+    college: req.body.college,
+    course: req.body.course,
+    courseBegin: req.body.start,
+    courseEnd: req.body.end,
+    admin: req.body.formValues.admin,
+  });
+  newUser.save();
+  return res.json({ result: user, token: token, message: "success" });
+};
