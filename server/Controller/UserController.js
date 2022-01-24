@@ -28,7 +28,6 @@ exports.register = async (req, res, next) => {
     const token = jwt.sign(
       { email: newUser.email, id: newUser._id },
       process.env.APP_SECRET,
-      { expiresIn: "1h" },
     );
     newUser.save();
     res.json({ result: newUser, token: token, message: "success" });
@@ -53,7 +52,6 @@ exports.login = async (req, res, next) => {
     const token = jwt.sign(
       { email: user.email, id: user._id },
       process.env.APP_SECRET,
-      { expiresIn: "1h" },
     );
 
     return res.json({ result: user, token: token, message: "success" });
