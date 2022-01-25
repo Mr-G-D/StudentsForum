@@ -403,14 +403,26 @@ const CreateAdmin = () => {
               </LocalizationProvider>
             </Grid>
           </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign Up
-          </Button>
+          <Grid className="buttonGrid">
+            <Button
+              className="button"
+              onClick={() => {
+                history.goBack();
+              }}
+              variant="contained"
+              color="warning"
+            >
+              Cancel
+            </Button>
+            <Button
+              className="button"
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
+              Create
+            </Button>
+          </Grid>
           <ToastContainer
             style={{ width: "auto", height: "10%", textSizeAdjust: "50%" }}
             position="bottom-right"
