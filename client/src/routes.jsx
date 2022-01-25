@@ -1,6 +1,7 @@
 import Dashboard from "pages/admin/Dashboard";
 import Users from "pages/admin/users";
 import CreateAdmin from "pages/admin/users/CreateAdmin";
+import Profile from "pages/admin/users/Profile";
 import SignIn from "pages/auth/SignIn";
 import SignUp from "pages/auth/SignUp";
 
@@ -36,6 +37,13 @@ export const adminRoutes = [
     path: "/admin/create",
     name: "users",
     component: CreateAdmin,
+    layout: "admin",
+  },
+
+  {
+    path: "/profile/:id",
+    name: "profile",
+    component: Profile,
     layout: "admin",
   },
 ];
