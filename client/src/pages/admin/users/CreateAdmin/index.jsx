@@ -22,7 +22,7 @@ import {
 import { DatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import { getColleges } from "api/main";
-import "styles/admin/students/createAdmin.css";
+import "styles/admin/users/createAdmin.css";
 import { getCourses } from "api/main";
 import { createAdmin } from "api/main";
 import { useHistory } from "react-router-dom";

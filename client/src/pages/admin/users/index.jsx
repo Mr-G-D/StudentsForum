@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "pages/admin/layouts/Navbar";
 import { Box, Button, Grid, MenuItem, Select, Typography } from "@mui/material";
-import "styles/admin/students/index.css";
+import "styles/admin/users/index.css";
 import Table from "pages/admin/users/Table";
 import { PersonAdd } from "@mui/icons-material";
 import { Link } from "react-router-dom";
