@@ -78,9 +78,7 @@ exports.index = async (req, res, next) => {
 
 exports.fetchUser = async (req, res) => {
   const type = req.query.type;
-  const response = await User.find({ admin: type }).select({
-    _id: 0,
-  });
+  const response = await User.find({ admin: type });
   res.json(response);
 };
 
