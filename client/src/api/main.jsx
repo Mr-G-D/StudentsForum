@@ -36,3 +36,10 @@ export const createAdmin = (formValues, college, course, start, end, dob) =>
     end: end,
     dob: dob,
   });
+export const getUser = (id) => {
+  API.get(`/users/profile/${id}`, {
+    params: {
+      id: id,
+    },
+  });
+};
