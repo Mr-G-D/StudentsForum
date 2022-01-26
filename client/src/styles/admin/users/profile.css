@@ -6,7 +6,9 @@
   text-align: start;
   justify-content: space-around;
 }
-
+.avatar {
+  align-items: center;
+}
 .user-details {
   display: flex;
   margin: 1% !important;
@@ -15,4 +17,11 @@
   font-family: Helvetica, sans-serif !important;
   font-style: italic;
   margin-left: 1.5% !important;
+}
+.statbox {
+  display: flex;
+  text-align: start;
+  margin: 2% 0px;
+  justify-content: space-around;
+  gap: 10%;
 }

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Navbar from "pages/admin/layouts/Navbar";
 import "styles/admin/users/profile.css";
 import { getUser } from "api/main";
+import StatBox from "pages/admin/Dashboard/StatBox";
 
 const Profile = () => {
   const [loading, setLoading] = useState(true);
@@ -28,7 +29,7 @@ const Profile = () => {
       <Grid className="paper">
         <Grid container className="upper-profile">
           <Grid container flex={3}>
-            <Grid flex={1}>
+            <Grid className="user-details-container avatar" flex={1}>
               {loading ? (
                 <CircularProgress />
               ) : (
@@ -67,8 +68,17 @@ const Profile = () => {
             )}
           </Grid>
 
-          <Grid container flex={1}>
-            Stat Box
+          <Grid container flex={1} className="statbox">
+            <StatBox
+              data="Discussions"
+              count={20}
+              icon="/assets/images/chat.png"
+            />
+            <StatBox
+              data="Comments"
+              count={56}
+              icon="/assets/images/chat.png"
+            />
           </Grid>
         </Grid>
         <Grid className="lower-profile">Discussions</Grid>
