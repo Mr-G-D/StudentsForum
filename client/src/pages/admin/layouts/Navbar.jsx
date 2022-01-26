@@ -89,7 +89,14 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem
+        onClick={() => {
+          history.push(`/profile/${user?.result?._id}`);
+          handleMenuClose();
+        }}
+      >
+        Profile
+      </MenuItem>
       <MenuItem onClick={logout}>Logout</MenuItem>
     </Menu>
   );
