@@ -12,22 +12,23 @@ const Profile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const response = await getUser(params.id);
-      setUser(response);
-      console.log(user, response);
+      setUser(response.data);
     };
     fetchUser();
-  });
+  }, [params]);
 
-  //   const avatarURL = `https://ui-avatars.com/api/?size=32&background=random&rounded=true&color=ffffff&name=${
-  //     user?.result?.firstName + "+" + user?.result?.lastName
-  //   }`;
+  const avatarURL = `https://ui-avatars.com/api/?size=512&background=random&rounded=true&color=ffffff&name=${
+    user?.firstName + "+" + user?.lastName
+  }`;
   return (
     <div>
       <Navbar />
       <Grid className="paper">
         <Grid container className="upper-profile">
           <Grid container flex={3}>
-            <Grid flex={1}>{/* <img src={url} /> */}</Grid>
+            <Grid flex={1}>
+              <img width={200} src={avatarURL} />
+            </Grid>
             <Grid container flex={3}>
               Details
             </Grid>

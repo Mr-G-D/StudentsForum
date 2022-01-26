@@ -109,7 +109,5 @@ exports.getUser = async (req, res, next) => {
   const id = req.query.id;
 
   const response = await User.findById(id);
-
-  console.log(response);
   res.send(response);
 };
