@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import Navbar from "pages/admin/layouts/Navbar";
 import "styles/admin/users/profile.css";
@@ -29,8 +29,11 @@ const Profile = () => {
             <Grid flex={1}>
               <img width={200} src={avatarURL} />
             </Grid>
-            <Grid container flex={3}>
-              Details
+            <Grid className="user-details" flex={3}>
+              <Typography>{user?.firstName + " " + user?.lastName}</Typography>
+              <Typography>{user?.emailID}</Typography>
+              <Typography>{user?.college}</Typography>
+              <Typography>{user?.course}</Typography>
             </Grid>
           </Grid>
           <Grid container flex={1}>
