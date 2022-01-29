@@ -9,7 +9,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import "styles/layouts/Sidebar.css";
-import { Assessment, Person, School } from "@mui/icons-material";
+import { Assessment, Person } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 export default function Sidebar(props) {
@@ -55,14 +55,6 @@ export default function Sidebar(props) {
                   <Person />
                 </ListItemIcon>
                 <ListItemText primary="Users" />
-              </ListItem>
-            </Link>
-            <Link className="link" to="/courses">
-              <ListItem button key="Courses">
-                <ListItemIcon>
-                  <School />
-                </ListItemIcon>
-                <ListItemText primary="Courses" />
               </ListItem>
             </Link>
           </List>
