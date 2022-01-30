@@ -20,3 +20,6 @@
   align-items: center;
   margin: 5%;
 }
+.link {
+  text-decoration: none !important;
+}
