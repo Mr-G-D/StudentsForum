@@ -1,4 +1,5 @@
 import Dashboard from "pages/admin/Dashboard";
+import Discussions from "pages/admin/Discussions";
 import Users from "pages/admin/users";
 import CreateAdmin from "pages/admin/users/CreateAdmin";
 import Profile from "pages/admin/users/Profile";
@@ -44,6 +45,13 @@ export const adminRoutes = [
     path: "/profile/:id",
     name: "profile",
     component: Profile,
+    layout: "admin",
+  },
+
+  {
+    path: "/discussions",
+    name: "discussions",
+    component: Discussions,
     layout: "admin",
   },
 ];
