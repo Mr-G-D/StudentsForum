@@ -27,10 +27,10 @@ export default function Navbar() {
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
-    if (jsonwebtoken.decode(user?.token).id !== user.result._id) {
+    if (jsonwebtoken.decode(user?.token)?.id !== user?.result?._id) {
       logout();
     }
-    if (!user.result.admin) {
+    if (!user?.result?.admin) {
       logout();
     }
     //eslint-disable-next-line
