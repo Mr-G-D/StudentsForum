@@ -6,7 +6,7 @@ const Discussion = (props) => {
     <Grid className="paper">
       <Typography>{props.data.title}</Typography>
       <Typography>{props.data.body}</Typography>
-      <Grid container>
+      <Grid flexDirection="row" justifyContent="space-between" container>
         <Typography>{props.data.userId}</Typography>
         <Typography>3 days ago</Typography>
       </Grid>
