@@ -1,5 +1,6 @@
 .discussionTitle {
   font-family: sans-serif !important;
+  padding: 0px 20px;
 }
 .discussionBody {
   font-weight: 400 !important;
@@ -25,5 +26,10 @@
 }
 .viewDiscussion {
   margin: 1% auto !important;
-  max-width: 80%;
+  max-width: 70%;
+  text-align-last: left;
+}
+.commentIcons {
+  margin: 0% 1%;
+  cursor: pointer;
 }
