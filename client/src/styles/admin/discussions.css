@@ -33,3 +33,7 @@
   margin: 0% 1%;
   cursor: pointer;
 }
+.rdw-editor-wrapper {
+  border: 1px solid black !important;
+  border-radius: 10px !important;
+}
