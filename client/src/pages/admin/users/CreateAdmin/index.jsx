@@ -199,7 +199,7 @@ const CreateAdmin = () => {
   return (
     <div>
       <Navbar />
-      <Box className="paper">
+      <Box className="paper admin_layout">
         <Typography fontFamily="serif" variant="h4">
           Create Admin
         </Typography>

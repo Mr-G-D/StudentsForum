@@ -21,7 +21,7 @@ const Discussions = () => {
     fetchData();
   }, []);
   return (
-    <div>
+    <div className=" admin_layout">
       <Navbar />
       <Box className="paper">
         <Typography margin={0} className="activityTitle" variant="subtitle1">

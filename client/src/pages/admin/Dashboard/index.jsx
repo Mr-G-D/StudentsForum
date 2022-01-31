@@ -9,9 +9,9 @@ import PieGraph from "./PieGraph";
 
 const Dashboard = () => {
   return (
-    <div>
+    <div className=" admin_layout">
       <Navbar />
-      <Grid container display="flex" className="item">
+      <Grid container display="flex" className="item admin_layout">
         <Grid flex={3} className="container">
           <Typography className="graphTitle" variant="subtitle1">
             Discussions Overview

@@ -1,5 +1,5 @@
-body {
-  background-color: #f0f0f0;
+.admin_layout {
+  background-color: #f0f0f0 !important;
 }
 .item {
   width: 100% !important;

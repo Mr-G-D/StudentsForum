@@ -26,7 +26,7 @@ const Profile = () => {
   return (
     <div>
       <Navbar />
-      <Grid className="paper">
+      <Grid className="paper admin_layout">
         <Grid container className="upper-profile">
           <Grid container flex={3}>
             <Grid className="user-details-container avatar" flex={1}>
