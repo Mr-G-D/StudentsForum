@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Checkbox,
   FormControlLabel,
   Grid,
@@ -10,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../layouts/Navbar";
 import Discussion from "./Discussion";
 import "styles/admin/discussions.css";
+import { Link } from "react-router-dom";
 
 const Discussions = () => {
   const [data, setData] = useState();
@@ -26,6 +28,15 @@ const Discussions = () => {
       <Box className="paper">
         <Typography margin={0} className="activityTitle" variant="subtitle1">
           Discussions
+          <Link to="discussion/create">
+            <Button
+              className="create_discussion"
+              variant="contained"
+              color="primary"
+            >
+              Create Discussion
+            </Button>
+          </Link>
         </Typography>
       </Box>
       <Box className="discussionsMain">

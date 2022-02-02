@@ -33,3 +33,7 @@
   margin: 0% 1%;
   cursor: pointer;
 }
+.create_discussion {
+  padding: 5px 10px !important;
+  float: right;
+}
