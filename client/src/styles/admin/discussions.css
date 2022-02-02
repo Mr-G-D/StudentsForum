@@ -5,7 +5,7 @@
 .discussionBody {
   font-weight: 400 !important;
   text-align: left;
-  padding: 20px;
+  padding: 10px 20px;
 }
 .discussionsMain {
   display: flex !important;
@@ -32,8 +32,4 @@
 .commentIcons {
   margin: 0% 1%;
   cursor: pointer;
-}
-.rdw-editor-wrapper {
-  border: 1px solid black !important;
-  border-radius: 10px !important;
 }

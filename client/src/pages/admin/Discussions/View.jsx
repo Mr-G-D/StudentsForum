@@ -59,7 +59,6 @@ const View = () => {
         )}
         <Box>
           <Box className="paper">
-            <Typography>Add Comment... </Typography>
             <Editor
               placeholder="   Add Comment..."
               defaultEditorState={editorState}

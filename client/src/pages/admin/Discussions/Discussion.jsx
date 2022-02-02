@@ -7,9 +7,14 @@ const Discussion = (props) => {
   return (
     <Grid className="paper">
       <Link className="link" to={"discussion/" + props.data.id + "/view"}>
-        <Typography variant="h5" className="discussionTitle">
-          {props.data.title}
-        </Typography>
+        <Grid display="flex" alignItems="center" justifyContent="space-between">
+          <Typography variant="h5" className="discussionTitle">
+            {props.data.title}
+          </Typography>
+          <Typography variant="subtitle2" className="discussionBody">
+            Label
+          </Typography>
+        </Grid>
         <Typography variant="subtitle2" className="discussionBody">
           {props.data.body}
         </Typography>
