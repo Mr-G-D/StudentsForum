@@ -2,6 +2,7 @@ import Dashboard from "pages/admin/Dashboard";
 import Discussions from "pages/admin/Discussions";
 import { default as CreateDiscussion } from "pages/admin/Discussions/Create";
 import View from "pages/admin/Discussions/View";
+import Tags from "pages/admin/Tags";
 import Users from "pages/admin/users";
 import CreateAdmin from "pages/admin/users/CreateAdmin";
 import Profile from "pages/admin/users/Profile";
@@ -66,6 +67,13 @@ export const adminRoutes = [
     path: "/discussion/create",
     name: "createDiscussions",
     component: CreateDiscussion,
+    layout: "admin",
+  },
+
+  {
+    path: "/tags",
+    name: "tags",
+    component: Tags,
     layout: "admin",
   },
 ];

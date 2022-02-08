@@ -1,0 +1,9 @@
+.tagsForm {
+  margin: 2%;
+}
+.tagsForm .MuiInputBase-root {
+  margin: 1% !important;
+}
+.new-tag {
+  text-align-last: left;
+}
