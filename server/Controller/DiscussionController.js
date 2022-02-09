@@ -13,3 +13,12 @@ exports.readTags = async (req, res) => {
   const tags = await Tag.find({});
   res.json({ message: "success", data: tags });
 };
+
+exports.deleteTag = async (req, res) => {
+  const id = req.query.id;
+  Tag.findOneAndDelete({ _id: id }, (err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
+};

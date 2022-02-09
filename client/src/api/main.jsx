@@ -44,3 +44,9 @@ export const getUser = (id) =>
   });
 export const createTag = (data) => API.post("/discussions/create/tag", data);
 export const readTags = () => API.get("/discussions/tags");
+export const deleteTag = (id) =>
+  API.get("/discussions/delete/tag", {
+    params: {
+      id: id,
+    },
+  });

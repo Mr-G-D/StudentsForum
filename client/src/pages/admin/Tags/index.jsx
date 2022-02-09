@@ -5,34 +5,25 @@ import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import Navbar from "../layouts/Navbar";
 import "styles/admin/tags.css";
-import { createTag } from "api/main";
-import { readTags } from "api/main";
+import { createTag, readTags, deleteTag } from "api/main";
 
 const Tags = () => {
-  const [rows, setRows] = useState([
-    {
-      name: "Mess",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, molestiae.",
-    },
-    {
-      name: "Transport",
-      description:
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum, similique.",
-    },
-  ]);
+  const [rows, setRows] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await readTags();
       setRows(data?.data);
-      console.log(data.data);
     };
     fetchData();
-  }, []);
+  }, [rows]);
 
-  const deleteTag = async (id) => {
-    const response = await window.confirm(id);
+  const delTag = async (id) => {
+    const del = await window.confirm("Are you sure ?");
+    if (del === true) {
+      // console.log(del);
+      deleteTag(id);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -43,13 +34,6 @@ const Tags = () => {
         name: data.get("name"),
         description: data.get("desc"),
       });
-      setRows([
-        ...rows,
-        {
-          name: data.get("name"),
-          description: data.get("desc"),
-        },
-      ]);
     }
   };
 
@@ -68,7 +52,7 @@ const Tags = () => {
       selector: (rows) => (
         <Button
           className="delete-button"
-          onClick={() => deleteTag(rows._id)}
+          onClick={() => delTag(rows._id)}
           variant="contained"
           color="error"
         >
