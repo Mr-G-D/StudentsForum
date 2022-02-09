@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import DataTable from "react-data-table-component";
 import Navbar from "../layouts/Navbar";
 import "styles/admin/tags.css";
+import { createTag } from "api/main";
 
 const Tags = () => {
   const [rows, setRows] = useState([
@@ -20,16 +21,26 @@ const Tags = () => {
     },
   ]);
 
+  const deleteTag = async () => {
+    const response = await window.confirm("Are you sure?");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    setRows([
-      ...rows,
-      {
+    if (data.get("name") !== "" && data.get("desc") !== "") {
+      createTag({
         name: data.get("name"),
         description: data.get("desc"),
-      },
-    ]);
+      });
+      setRows([
+        ...rows,
+        {
+          name: data.get("name"),
+          description: data.get("desc"),
+        },
+      ]);
+    }
   };
 
   let count = 1;
@@ -41,12 +52,17 @@ const Tags = () => {
       selector: (rows) => rows.description,
     },
     {
-      name: "Manage",
+      name: "Action",
       center: true,
       maxWidth: "500px",
       selector: (row) => (
-        <Button className="manage-button" variant="contained" color="warning">
-          View
+        <Button
+          className="delete-button"
+          onClick={deleteTag}
+          variant="contained"
+          color="error"
+        >
+          Delete
         </Button>
       ),
     },

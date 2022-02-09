@@ -7,6 +7,7 @@ const app = express();
 const HomeController = require("./Controller/HomeController");
 const authRoutes = require("./Routes/Auth");
 const UserRoutes = require("./Routes/Users");
+const discussionRoutes = require("./Routes/Discussions");
 
 app.use(cors());
 app.use(express.json());
@@ -19,6 +20,7 @@ const port = process.env.PORT;
 
 app.use("/auth", authRoutes);
 app.use("/users", UserRoutes);
+app.use("/discussions", discussionRoutes);
 
 // app.get("/feedCollege", HomeController.feedData);
 // app.get("/feedCourses", HomeController.feedCourses);

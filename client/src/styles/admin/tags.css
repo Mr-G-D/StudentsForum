@@ -7,3 +7,6 @@
 .new-tag {
   text-align-last: left;
 }
+.delete-button {
+  padding: 5% !important;
+}
