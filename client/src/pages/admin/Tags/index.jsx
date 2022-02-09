@@ -8,7 +8,18 @@ import "styles/admin/tags.css";
 import { createTag, readTags, deleteTag } from "api/main";
 
 const Tags = () => {
-  const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState([
+    {
+      name: "Mess",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, molestiae.",
+    },
+    {
+      name: "Transport",
+      description:
+        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum, similique.",
+    },
+  ]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,6 +27,7 @@ const Tags = () => {
       setRows(data?.data);
     };
     fetchData();
+    return true;
   }, [rows]);
 
   const delTag = async (id) => {
