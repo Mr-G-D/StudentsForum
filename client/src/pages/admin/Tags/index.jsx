@@ -1,11 +1,12 @@
 import { AddCircleOutline } from "@mui/icons-material";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import Navbar from "../layouts/Navbar";
 import "styles/admin/tags.css";
 import { createTag } from "api/main";
+import { readTags } from "api/main";
 
 const Tags = () => {
   const [rows, setRows] = useState([
@@ -21,8 +22,17 @@ const Tags = () => {
     },
   ]);
 
-  const deleteTag = async () => {
-    const response = await window.confirm("Are you sure?");
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await readTags();
+      setRows(data?.data);
+      console.log(data.data);
+    };
+    fetchData();
+  }, []);
+
+  const deleteTag = async (id) => {
+    const response = await window.confirm(id);
   };
 
   const handleSubmit = async (e) => {
@@ -55,10 +65,10 @@ const Tags = () => {
       name: "Action",
       center: true,
       maxWidth: "500px",
-      selector: (row) => (
+      selector: (rows) => (
         <Button
           className="delete-button"
-          onClick={deleteTag}
+          onClick={() => deleteTag(rows._id)}
           variant="contained"
           color="error"
         >

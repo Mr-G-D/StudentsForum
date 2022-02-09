@@ -8,3 +8,8 @@ exports.createTag = async (req, res) => {
   newTag.save();
   res.json({ message: "success" });
 };
+
+exports.readTags = async (req, res) => {
+  const tags = await Tag.find({});
+  res.json({ message: "success", data: tags });
+};
