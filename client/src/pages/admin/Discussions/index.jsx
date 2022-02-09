@@ -12,13 +12,17 @@ import Navbar from "../layouts/Navbar";
 import Discussion from "./Discussion";
 import "styles/admin/discussions.css";
 import { Link } from "react-router-dom";
+import { readTags } from "api/main";
 
 const Discussions = () => {
   const [data, setData] = useState();
+  const [labels, setLabels] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get("https://dummyjson.com/posts");
       setData(response.data.posts);
+      const { data } = await readTags();
+      setLabels(data.data);
     };
     fetchData();
   }, []);
@@ -45,18 +49,13 @@ const Discussions = () => {
             Filters
           </Typography>
           <Box className="filters">
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label="Label"
-            />
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label="Label"
-            />
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label="Label"
-            />
+            {labels?.map((element) => (
+              <FormControlLabel
+                key={element._id}
+                control={<Checkbox defaultChecked />}
+                label={element.name}
+              />
+            ))}
           </Box>
         </Grid>
         <Grid flex={5} className="discussions">
