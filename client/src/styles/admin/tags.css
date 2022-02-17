@@ -1,7 +1,8 @@
 .tagsForm {
   margin: 2%;
 }
-.tagsForm .MuiInputBase-root {
+.tagsForm .MuiInputBase-root,
+.tagsForm .MuiOutlinedInput-root {
   margin: 1% !important;
 }
 .new-tag {

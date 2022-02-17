@@ -38,3 +38,19 @@
   padding: 5px 10px !important;
   float: right;
 }
+.select {
+  width: -webkit-fill-available;
+  text-align-last: left;
+}
+.wrapper-class {
+  border: solid 1px;
+  border-color: rgba(0, 0, 0, 0.87) !important;
+  border-radius: 4px;
+  margin: 12px;
+  padding: 10px;
+}
+.editor-class {
+  padding: 0% 1%;
+  height: 35vh !important;
+  overflow: initial !important;
+}

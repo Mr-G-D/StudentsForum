@@ -24,9 +24,9 @@ const Profile = () => {
     user?.firstName + "+" + user?.lastName
   }`;
   return (
-    <div>
+    <div className="admin_layout">
       <Navbar />
-      <Grid className="paper admin_layout">
+      <Grid className="paper ">
         <Grid container className="upper-profile">
           <Grid container flex={3}>
             <Grid className="user-details-container avatar" flex={1}>
