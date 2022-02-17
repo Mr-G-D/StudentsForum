@@ -13,6 +13,7 @@ import Navbar from "../layouts/Navbar";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import { stateToHTML } from "draft-js-export-html";
+import { submitDiscussion } from "api/main";
 
 const Create = () => {
   // const [formData, setFormData] = useState({
@@ -41,7 +42,7 @@ const Create = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(body, topic, subject);
+    submitDiscussion(topic, subject, body);
   };
   return (
     <div className="admin_layout">

@@ -2,6 +2,7 @@ const {
   createTag,
   readTags,
   deleteTag,
+  submitDiscussion,
 } = require("../Controller/DiscussionController");
 
 const express = require("express");
@@ -12,5 +13,7 @@ router.post("/create/tag", createTag);
 router.get("/tags", readTags);
 
 router.get("/delete/tag", deleteTag);
+
+router.post("/create", submitDiscussion);
 
 module.exports = router;

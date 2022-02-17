@@ -22,3 +22,7 @@ exports.deleteTag = async (req, res) => {
     }
   });
 };
+
+exports.submitDiscussion = async (req, res) => {
+  const { topic, subject, body } = req.body;
+};

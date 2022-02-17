@@ -50,3 +50,10 @@ export const deleteTag = (id) =>
       id: id,
     },
   });
+
+export const submitDiscussion = (topic, subject, body) =>
+  API.post("/discussions/create", {
+    topic: topic,
+    subject: subject,
+    body: body,
+  });
