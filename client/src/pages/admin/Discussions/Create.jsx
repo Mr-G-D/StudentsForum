@@ -14,14 +14,26 @@ import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import { stateToHTML } from "draft-js-export-html";
 import { submitDiscussion } from "api/main";
+import { toast, ToastContainer } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 const Create = () => {
-  // const [formData, setFormData] = useState({
-  //   topic: "",
-  //   body: "",
-  // });
+  const history = useHistory();
+  const notify = (message) => {
+    toast.error(`${message} cannot be empty.`, {
+      theme: "colored",
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
   const [topic, setTopic] = useState("");
-  const [body, setBody] = useState();
+  const [body, setBody] = useState("");
   const [subject, setSubject] = useState("");
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty(),
@@ -40,9 +52,28 @@ const Create = () => {
     // JSON.stringify(convertToRaw(editorState.getCurrentContent()))
     setBody(contentState);
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    submitDiscussion(topic, subject, body);
+    const { result } = await JSON.parse(localStorage.getItem("profile"));
+    if (topic === "") {
+      notify("Topic");
+      return false;
+    }
+    if (subject === "") {
+      notify("Subject");
+      return false;
+    }
+    if (body === "") {
+      notify("Body");
+      return false;
+    }
+    if (result === null) {
+      return false;
+    }
+    const { data } = await submitDiscussion(topic, subject, body, result);
+    if (data.message === "success") {
+      history.push("/discussions");
+    }
   };
   return (
     <div className="admin_layout">
@@ -153,6 +184,18 @@ const Create = () => {
           </Button>
         </Box>
       </Box>
+      <ToastContainer
+        style={{ width: "auto", height: "10%", textSizeAdjust: "50%" }}
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

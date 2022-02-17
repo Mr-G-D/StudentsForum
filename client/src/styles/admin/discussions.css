@@ -44,7 +44,7 @@
 }
 .wrapper-class {
   border: solid 1px;
-  border-color: rgba(0, 0, 0, 0.87) !important;
+  border-color: rgba(0, 0, 0, 0.17) !important;
   border-radius: 4px;
   margin: 12px;
   padding: 10px;

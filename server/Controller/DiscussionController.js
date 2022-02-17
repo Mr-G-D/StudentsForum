@@ -1,3 +1,4 @@
+const Discussion = require("../Models/Discussion");
 const Tag = require("../Models/Tag");
 
 exports.createTag = async (req, res) => {
@@ -24,5 +25,14 @@ exports.deleteTag = async (req, res) => {
 };
 
 exports.submitDiscussion = async (req, res) => {
-  const { topic, subject, body } = req.body;
+  const { topic, subject, body, author } = req.body;
+  const newDiscussion = await Discussion.create({
+    topic: topic,
+    subject: subject,
+    body: body,
+    author: author.firstName + " " + author.lastName,
+    created_at: new Date(),
+  });
+  newDiscussion.save();
+  res.json({ message: "success" });
 };
