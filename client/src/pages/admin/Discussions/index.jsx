@@ -6,23 +6,25 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Navbar from "../layouts/Navbar";
 import Discussion from "./Discussion";
 import "styles/admin/discussions.css";
 import { Link } from "react-router-dom";
 import { readTags } from "api/main";
+import { getDiscussions } from "api/main";
 
 const Discussions = () => {
   const [data, setData] = useState();
   const [labels, setLabels] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get("https://dummyjson.com/posts");
-      setData(response.data.posts);
-      const { data } = await readTags();
-      setLabels(data.data);
+      const discussions = await getDiscussions();
+      setData(discussions.data.discussions);
+      // const response = await axios.get("https://dummyjson.com/posts");
+      // setData([...data, response.data.posts]);
+      const tags = await readTags();
+      setLabels(tags.data.data);
     };
     fetchData();
   }, []);
@@ -61,7 +63,7 @@ const Discussions = () => {
         <Grid flex={5} className="discussions">
           {data
             ? data.map((ele) => {
-                return <Discussion key={ele.id} data={ele} />;
+                return <Discussion key={ele._id} data={ele} />;
               })
             : ""}
         </Grid>

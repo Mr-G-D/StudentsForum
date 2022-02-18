@@ -36,3 +36,8 @@ exports.submitDiscussion = async (req, res) => {
   newDiscussion.save();
   res.json({ message: "success" });
 };
+
+exports.getDiscussion = async (req, res) => {
+  const discussions = await Discussion.find({}).sort({ created_at: -1 });
+  res.json({ discussions: discussions });
+};

@@ -3,6 +3,7 @@ const {
   readTags,
   deleteTag,
   submitDiscussion,
+  getDiscussion,
 } = require("../Controller/DiscussionController");
 
 const express = require("express");
@@ -15,5 +16,7 @@ router.get("/tags", readTags);
 router.get("/delete/tag", deleteTag);
 
 router.post("/create", submitDiscussion);
+
+router.get("/getDiscussions", getDiscussion);
 
 module.exports = router;

@@ -1,4 +1,5 @@
 import { Grid, Typography } from "@mui/material";
+import moment from "moment";
 import React from "react";
 import { Link } from "react-router-dom";
 import "styles/admin/discussions.css";
@@ -9,20 +10,24 @@ const Discussion = (props) => {
       <Link className="link" to={"discussion/" + props.data.id + "/view"}>
         <Grid display="flex" alignItems="center" justifyContent="space-between">
           <Typography variant="h5" className="discussionTitle">
-            {props.data.title}
+            {props.data.topic}
           </Typography>
           <Typography variant="subtitle2" className="discussionBody">
-            Label
+            {props.data.subject}
           </Typography>
         </Grid>
-        <Typography variant="subtitle2" className="discussionBody">
-          {props.data.body}
-        </Typography>
+        <Typography
+          variant="subtitle2"
+          className="discussionBody"
+          dangerouslySetInnerHTML={{ __html: props.data.body }}
+        ></Typography>
         <Grid flexDirection="row" justifyContent="space-between" container>
-          <Typography className="discussionAuthor">
-            {props.data.userId}
+          <Typography variant="caption" className="discussionAuthor">
+            {props.data.author}
           </Typography>
-          <Typography className="discussionTime">3 days ago</Typography>
+          <Typography className="discussionTime">
+            {moment(props.data.created_at).fromNow()}
+          </Typography>
         </Grid>
       </Link>
     </Grid>

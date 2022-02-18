@@ -58,3 +58,5 @@ export const submitDiscussion = (topic, subject, body, author) =>
     body: body,
     author: author,
   });
+
+export const getDiscussions = () => API.get("/discussions/getDiscussions");
