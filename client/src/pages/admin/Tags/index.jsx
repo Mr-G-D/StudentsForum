@@ -8,18 +8,7 @@ import "styles/admin/tags.css";
 import { createTag, readTags, deleteTag } from "api/main";
 
 const Tags = () => {
-  const [rows, setRows] = useState([
-    {
-      name: "Mess",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, molestiae.",
-    },
-    {
-      name: "Transport",
-      description:
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum, similique.",
-    },
-  ]);
+  const [rows, setRows] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,11 +31,12 @@ const Tags = () => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     if (data.get("name") !== "" && data.get("desc") !== "") {
-      createTag({
+      await createTag({
         name: data.get("name"),
         description: data.get("desc"),
       });
     }
+    e.target.reset();
   };
 
   let count = 1;

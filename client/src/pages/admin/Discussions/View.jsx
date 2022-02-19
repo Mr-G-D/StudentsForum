@@ -12,6 +12,7 @@ import { getDiscussion } from "api/main";
 import moment from "moment";
 import { toast, ToastContainer } from "react-toastify";
 import { createComment } from "api/main";
+import $ from "jquery";
 
 const View = () => {
   const params = useParams();
@@ -38,7 +39,8 @@ const View = () => {
     fetchData();
   }, [params]);
 
-  const postComment = async () => {
+  const postComment = async (event) => {
+    event.preventDefault();
     if (text === undefined || text === "" || text === "<p><br></p>") {
       toast.error(`Comment cannot be empty.`, {
         theme: "colored",
@@ -53,6 +55,8 @@ const View = () => {
     } else {
       const { result } = await JSON.parse(localStorage.getItem("profile"));
       createComment(params.id, text, result.firstName + " " + result.lastName);
+      $(".editor-class")[0].innerHTML =
+        '<div class="DraftEditor-root"><div class="public-DraftEditorPlaceholder-root"><div class="public-DraftEditorPlaceholder-inner" id="placeholder-42ji8" style="white-space: pre-wrap;"></div></div><div class="DraftEditor-editorContainer"><div aria-describedby="placeholder-42ji8" aria-label="rdw-editor" class="notranslate public-DraftEditor-content" contenteditable="true" role="textbox" spellcheck="false" style="outline: none; user-select: text; white-space: pre-wrap; overflow-wrap: break-word;"><div data-contents="true"><div class="" data-block="true" data-editor="42ji8" data-offset-key="4mgpg-0-0"><div data-offset-key="4mgpg-0-0" class="public-DraftStyleDefault-block public-DraftStyleDefault-ltr"><span data-offset-key="4mgpg-0-0"><br data-text="true"></span></div></div></div></div></div></div>';
     }
   };
   return (
