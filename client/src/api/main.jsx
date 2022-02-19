@@ -66,3 +66,10 @@ export const getDiscussion = (id) =>
       id: id,
     },
   });
+
+export const createComment = (id, comment, author) =>
+  API.post("discussions/createComment", {
+    discussion_id: id,
+    comment: comment,
+    author: author,
+  });

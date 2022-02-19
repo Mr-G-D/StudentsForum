@@ -10,6 +10,8 @@ import { stateToHTML } from "draft-js-export-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { getDiscussion } from "api/main";
 import moment from "moment";
+import { toast, ToastContainer } from "react-toastify";
+import { createComment } from "api/main";
 
 const View = () => {
   const params = useParams();
@@ -35,6 +37,24 @@ const View = () => {
     };
     fetchData();
   }, [params]);
+
+  const postComment = async () => {
+    if (text === undefined || text === "" || text === "<p><br></p>") {
+      toast.error(`Comment cannot be empty.`, {
+        theme: "colored",
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      const { result } = await JSON.parse(localStorage.getItem("profile"));
+      createComment(params.id, text, result.firstName + " " + result.lastName);
+    }
+  };
   return (
     <div className="">
       <Navbar />
@@ -85,7 +105,8 @@ const View = () => {
             />
             <Box className="submitComment">
               <Button
-                type="submit"
+                onClick={postComment}
+                type="Button"
                 style={{
                   marginRight: "2%",
                 }}
@@ -126,6 +147,18 @@ const View = () => {
             <CircularProgress />
           )}
         </Box>
+        <ToastContainer
+          style={{ width: "auto", height: "10%", textSizeAdjust: "50%" }}
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </Box>
     </div>
   );
