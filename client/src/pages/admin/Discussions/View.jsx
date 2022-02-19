@@ -1,5 +1,5 @@
 import { ThumbDownOutlined, ThumbUpOutlined } from "@mui/icons-material";
-import { Box, CircularProgress, Grid, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -83,6 +83,17 @@ const View = () => {
               toolbarClassName="toolbar-class"
               onChange={handleChange}
             />
+            <Box className="submitComment">
+              <Button
+                type="submit"
+                style={{
+                  marginRight: "2%",
+                }}
+                variant="contained"
+              >
+                Post
+              </Button>
+            </Box>
           </Box>
           {data ? (
             data.map((ele) => {

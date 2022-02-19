@@ -158,7 +158,7 @@ const Create = () => {
             <Grid className="new-tag" flex={1}>
               Body
             </Grid>
-            <Grid flex={6}>
+            <Grid className="test" flex={6}>
               <Editor
                 placeholder="Body"
                 defaultEditorState={editorState}

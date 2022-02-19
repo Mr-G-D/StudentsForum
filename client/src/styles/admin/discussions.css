@@ -55,8 +55,12 @@
   margin: 12px;
   padding: 10px;
 }
-.editor-class {
+.test .editor-class {
   padding: 0% 1%;
   height: 38vh !important;
   overflow: initial !important;
+}
+
+.submitComment {
+  text-align-last: right !important;
 }
