@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
   discussion_id: {
-    type: Number,
+    type: String,
     required: true,
   },
   comment: {

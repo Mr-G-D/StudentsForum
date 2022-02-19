@@ -1,3 +1,4 @@
+const Comment = require("../Models/Comment");
 const Discussion = require("../Models/Discussion");
 const Tag = require("../Models/Tag");
 
@@ -50,5 +51,12 @@ exports.getDiscussion = async (req, res) => {
 
 exports.createComment = async (req, res) => {
   const { discussion_id, comment, author } = req.body;
-  console.log(discussion_id, comment, author);
+  const newComment = await new Comment({
+    discussion_id: discussion_id,
+    comment: comment,
+    author: author,
+    created_at: new Date(),
+  });
+  newComment.save();
+  res.json({ message: "success" });
 };
