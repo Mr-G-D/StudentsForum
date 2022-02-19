@@ -4,6 +4,7 @@ const {
   deleteTag,
   submitDiscussion,
   getDiscussion,
+  getDiscussions,
 } = require("../Controller/DiscussionController");
 
 const express = require("express");
@@ -17,6 +18,8 @@ router.get("/delete/tag", deleteTag);
 
 router.post("/create", submitDiscussion);
 
-router.get("/getDiscussions", getDiscussion);
+router.get("/getDiscussions", getDiscussions);
+
+router.get("/getdiscussion", getDiscussion);
 
 module.exports = router;

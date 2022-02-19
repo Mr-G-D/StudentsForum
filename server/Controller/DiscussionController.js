@@ -37,7 +37,13 @@ exports.submitDiscussion = async (req, res) => {
   res.json({ message: "success" });
 };
 
-exports.getDiscussion = async (req, res) => {
+exports.getDiscussions = async (req, res) => {
   const discussions = await Discussion.find({}).sort({ created_at: -1 });
   res.json({ discussions: discussions });
+};
+
+exports.getDiscussion = async (req, res) => {
+  const { id } = req.query;
+  const discussion = await Discussion.find({ _id: id });
+  res.json(discussion);
 };
