@@ -5,6 +5,7 @@ const {
   submitDiscussion,
   getDiscussion,
   getDiscussions,
+  createComment,
 } = require("../Controller/DiscussionController");
 
 const express = require("express");
@@ -21,5 +22,7 @@ router.post("/create", submitDiscussion);
 router.get("/getDiscussions", getDiscussions);
 
 router.get("/getdiscussion", getDiscussion);
+
+router.post("/createComment", createComment);
 
 module.exports = router;

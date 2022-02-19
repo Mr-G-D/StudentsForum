@@ -47,3 +47,8 @@ exports.getDiscussion = async (req, res) => {
   const discussion = await Discussion.find({ _id: id });
   res.json(discussion);
 };
+
+exports.createComment = async (req, res) => {
+  const { discussion_id, comment, author } = req.body;
+  console.log(discussion_id, comment, author);
+};
