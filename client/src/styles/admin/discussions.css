@@ -7,6 +7,12 @@
   text-align: left;
   padding: 10px 20px;
 }
+.discussionExtra {
+  padding: 0% 20px;
+}
+.discussionAuthor {
+  padding: 5px !important;
+}
 .discussionsMain {
   display: flex !important;
   flex-direction: row;

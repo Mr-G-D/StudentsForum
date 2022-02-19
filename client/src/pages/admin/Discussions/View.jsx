@@ -8,6 +8,8 @@ import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import { stateToHTML } from "draft-js-export-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { getDiscussion } from "api/main";
+import moment from "moment";
 
 const View = () => {
   const params = useParams();
@@ -25,13 +27,11 @@ const View = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `https://dummyjson.com/posts/${params.id}/comments`,
+        `https://dummyjson.com/posts/1/comments`,
       );
       setData(response.data.comments);
-      const result = await axios.get(
-        `https://dummyjson.com/posts/${params.id}`,
-      );
-      setDiscussion(result.data);
+      const result = await getDiscussion(params.id);
+      setDiscussion(result.data[0]);
     };
     fetchData();
   }, [params]);
@@ -42,16 +42,31 @@ const View = () => {
         {discussion ? (
           <Box className="paper ">
             <Typography variant="h5" className="discussionTitle">
-              {discussion.title}
+              {discussion.topic}
             </Typography>
-            <Typography variant="subtitle2" className="discussionBody">
-              {discussion.body}
-            </Typography>
-            <Grid flexDirection="row" justifyContent="space-between" container>
-              <Typography className="discussionAuthor">
-                {discussion.userId}
+            <Typography
+              variant="subtitle2"
+              className="discussionBody"
+              dangerouslySetInnerHTML={{ __html: discussion.body }}
+            ></Typography>
+            <Grid
+              flexDirection="row"
+              justifyContent="space-between"
+              className="discussionExtra"
+              container
+            >
+              <Grid display="flex" flexDirection="row" alignItems="center">
+                <img
+                  src={`https://ui-avatars.com/api/?size=32&background=random&rounded=true&color=ffffff&name=${discussion.author}`}
+                  alt="avatar"
+                />
+                <Typography className="discussionAuthor" variant="caption">
+                  {discussion.author}
+                </Typography>
+              </Grid>
+              <Typography className="discussionTime" variant="caption">
+                {moment(discussion.created_at).fromNow()}
               </Typography>
-              <Typography className="discussionTime">3 days ago</Typography>
             </Grid>
           </Box>
         ) : (
@@ -68,27 +83,6 @@ const View = () => {
               toolbarClassName="toolbar-class"
               onChange={handleChange}
             />
-          </Box>
-          <Box key={1} className="paper">
-            <Typography display="flex" alignItems="center">
-              <img
-                style={{
-                  padding: "1%",
-                  borderRadius: "50%",
-                }}
-                src={`https://i.pravatar.cc/40?u=1`}
-                alt="Avatar"
-              />
-              Show how to display html data
-            </Typography>
-            <Typography
-              dangerouslySetInnerHTML={{ __html: text }}
-              marginLeft="50px"
-            ></Typography>
-            <Grid display="flex" flexDirection="row" justifyContent="flex-end">
-              <ThumbUpOutlined className="commentIcons" />
-              <ThumbDownOutlined className="commentIcons" />
-            </Grid>
           </Box>
           {data ? (
             data.map((ele) => {

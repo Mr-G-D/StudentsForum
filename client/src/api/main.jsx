@@ -60,3 +60,9 @@ export const submitDiscussion = (topic, subject, body, author) =>
   });
 
 export const getDiscussions = () => API.get("/discussions/getDiscussions");
+export const getDiscussion = (id) =>
+  API.get("/discussions/getDiscussion", {
+    params: {
+      id: id,
+    },
+  });

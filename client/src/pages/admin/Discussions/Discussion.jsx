@@ -7,7 +7,7 @@ import "styles/admin/discussions.css";
 const Discussion = (props) => {
   return (
     <Grid className="paper">
-      <Link className="link" to={"discussion/" + props.data.id + "/view"}>
+      <Link className="link" to={"discussion/" + props.data._id + "/view"}>
         <Grid display="flex" alignItems="center" justifyContent="space-between">
           <Typography variant="h5" className="discussionTitle">
             {props.data.topic}
