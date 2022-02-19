@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Checkbox,
+  CircularProgress,
   FormControlLabel,
   Grid,
   Typography,
@@ -16,7 +17,7 @@ import { getDiscussions } from "api/main";
 
 const Discussions = () => {
   const [data, setData] = useState();
-  const [labels, setLabels] = useState([]);
+  const [labels, setLabels] = useState();
   useEffect(() => {
     const fetchData = async () => {
       const discussions = await getDiscussions();
@@ -51,21 +52,27 @@ const Discussions = () => {
             Filters
           </Typography>
           <Box className="filters">
-            {labels?.map((element) => (
-              <FormControlLabel
-                key={element._id}
-                control={<Checkbox defaultChecked />}
-                label={element.name}
-              />
-            ))}
+            {labels ? (
+              labels.map((element) => (
+                <FormControlLabel
+                  key={element._id}
+                  control={<Checkbox defaultChecked />}
+                  label={element.name}
+                />
+              ))
+            ) : (
+              <CircularProgress />
+            )}
           </Box>
         </Grid>
         <Grid flex={5} className="discussions">
-          {data
-            ? data.map((ele) => {
-                return <Discussion key={ele._id} data={ele} />;
-              })
-            : ""}
+          {data ? (
+            data.map((ele) => {
+              return <Discussion key={ele._id} data={ele} />;
+            })
+          ) : (
+            <CircularProgress />
+          )}
         </Grid>
       </Box>
     </div>

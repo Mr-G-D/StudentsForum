@@ -21,11 +21,22 @@ const Discussion = (props) => {
           className="discussionBody"
           dangerouslySetInnerHTML={{ __html: props.data.body }}
         ></Typography>
-        <Grid flexDirection="row" justifyContent="space-between" container>
-          <Typography variant="caption" className="discussionAuthor">
-            {props.data.author}
-          </Typography>
-          <Typography className="discussionTime">
+        <Grid
+          flexDirection="row"
+          justifyContent="space-between"
+          className="discussionExtra"
+          container
+        >
+          <Grid display="flex" flexDirection="row" alignItems="center">
+            <img
+              src={`https://ui-avatars.com/api/?size=32&background=random&rounded=true&color=ffffff&name=${props.data.author}`}
+              alt="avatar"
+            />
+            <Typography className="discussionAuthor" variant="caption">
+              {props.data.author}
+            </Typography>
+          </Grid>
+          <Typography className="discussionTime" variant="caption">
             {moment(props.data.created_at).fromNow()}
           </Typography>
         </Grid>
