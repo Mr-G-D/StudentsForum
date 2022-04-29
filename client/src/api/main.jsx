@@ -73,3 +73,10 @@ export const createComment = (id, comment, author) =>
     comment: comment,
     author: author,
   });
+
+export const getComments = (id) =>
+  API.get("discussions/getComments", {
+    params: {
+      id: id,
+    },
+  });

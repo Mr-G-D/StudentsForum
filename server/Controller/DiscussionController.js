@@ -60,3 +60,9 @@ exports.createComment = async (req, res) => {
   newComment.save();
   res.json({ message: "success" });
 };
+
+exports.getComments = async (req, res) => {
+  const { id } = req.query;
+  const response = await Comment.find({ discussion_id: id });
+  res.json(response);
+};
